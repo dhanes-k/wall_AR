@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sangeetha</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./assets/img/sangeetha favicon.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="./assets/bootstrap-5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="splashScreen"></div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="piano">
+              <div class="key white" data-note="C">C</div>
+              <div class="key black" data-note="C#">C#</div>
+              <div class="key white" data-note="D">D</div>
+              <div class="key black" data-note="D#">D#</div>
+              <div class="key white" data-note="E">E</div>
+              <div class="key white" data-note="F">F</div>
+              <div class="key black" data-note="F#">F#</div>
+              <div class="key white" data-note="G">G</div>
+              <div class="key black" data-note="G#">G#</div>
+              <div class="key white" data-note="A">A</div>
+              <div class="key black" data-note="A#">A#</div>
+              <div class="key white" data-note="B">B</div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="homeScreen">
+      <div class="heading">
+        <h4>Sangeetha Veg Restaurant</h4>
+      </div>
+      <div class="main">
+        <div class="AR">
+          <!-- <button class="btn btn-light btn-shadow">
+            Start with AR&nbsp;<img
+              src="./assets/img/rightarrow.svg"
+              alt=""
+              class="AR_arrow"
+            />
+          </button> -->
+          <button type="button" class="spacebtn" onclick="location.href='https://dhanes-k.github.io/reality/'">
+            <strong
+              >Start with AR
+              <img src="./assets/img/rightarrow.svg" alt="" class="AR_arrow"
+            /></strong>
+            <div id="container-stars">
+              <div id="stars"></div>
+            </div>
+
+            <div id="glow">
+              <div class="circle"></div>
+              <div class="circle"></div>
+            </div>
+          </button>
+        </div>
+        <div class="main_menu my-4">
+          <div class="row w-100 h-100">
+            <div class="col-6">
+              <div class="card" onclick="openModel('Piano')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="./assets/img/piano.svg" value="PIANO" alt="piano" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card" onclick="openModel('Drums')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="./assets/img/drums.svg" value="DRUMS" alt="drums" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card" onclick="openModel('Guitar')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="./assets/img/guitar.svg" value="GUITAR" alt="drums" />
+              </div>
+            </div>
+            <div class="col-6 card_singer">
+              <div class="card_one">
+                <div class="row w-100 h-100" onclick="openModel('M. S. Subbulakshmi')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <div class="col-4 p-0 m-0">
+                    <img
+                      src="./assets/img/m-s-subbulakshmi(2).jpg"
+                      class="img-fluid w-100 singer_img"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="col-8 Singer_desc">
+                    <small class="text-body-content"
+                      >M. S. Subbulakshmi <br> 
+                      Indian singer
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 px-3">
+                <hr>
+              </div>
+              <div class="card_two">
+                <div class="row w-100 h-100" onclick="openModel('K. J. Yesudas')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <div class="col-4 p-0 m-0">
+                    <img
+                      src="./assets/img/yesudas.jpg"
+                      class="img-fluid w-100 singer_img"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="col-8 Singer_desc">
+                    <small class="text-body-content"
+                      >K. J. Yesudas <br />Indian Singer
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="orderNow mt-2">
+          <button class="btn btn-success btn-shadow">
+            <a href="https://www.sangeethasdesimane.com/" target="_blank"
+              >Order Now &nbsp;<span class="orderNowArrow"></span
+            ></a>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script src="./assets/bootstrap-5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
