@@ -1,54 +1,327 @@
-const modal = document.getElementById("exampleModalLabel");
+const modal = document.querySelector("#exampleModalLabel");
+const PIANO = document.querySelector(".piano");
+const DRUMS = document.querySelector(".drums");
+const keys = document.querySelectorAll(".key");
+const glassModal = document.querySelector(".glass_modal");
+const next = document.querySelector(".next");
+const finish = document.querySelector(".finish");
+const circleParent = document.querySelector(".circle_parent");
+const question_title = document.querySelector(".question");
+const scoreResult = document.querySelector(".score");
+const applause = new Audio("./assets/sounds/applause.wav");
+let currentQuestion = 0;
+let score = 0;
+let questions = [
+  {
+    question: "Who is known as the 'Father of the Sitar'?",
+    options: ["Ravi Shankar", "Anoushka Shankar", "Vilayat Khan"],
+    answer: "Ravi Shankar",
+  },
+  {
+    question:
+      "Which of these materials is traditionally used to make the sitar's body?",
+    options: ["Wood", "Metal", "Plastic"],
+    answer: "Wood",
+  },
+  {
+    question: "In which country did the sitar originate?",
+    options: ["India", "Pakistan", "Afghanistan"],
+    answer: "India",
+  },
+  {
+    question: "What is the main string of a sitar called?",
+    options: ["Gandhar", "Chikari", "Badhani"],
+    answer: "Chikari",
+  },
+  {
+    question:
+      "Which Indian classical music tradition is the sitar most commonly associated with?",
+    options: ["Hindustani", "Carnatic", "Dhrupad"],
+    answer: "Hindustani",
+  },
+  {
+    question: "Which famous sitar player performed at Woodstock in 1969?",
+    options: ["Anoushka Shankar", "Ravi Shankar", "Ustad Vilayat Khan"],
+    answer: "Ravi Shankar",
+  },
+  {
+    question: "How many strings does a typical sitar have?",
+    options: ["6-7", "8-9", "4-5"],
+    answer: "6-7",
+  },
+  {
+    question:
+      "What is the name of the tuning pegs on a sitar that are used for fine-tuning?",
+    options: ["Tumbi", "Mukhra", "Taraf"],
+    answer: "Taraf",
+  },
+  {
+    question:
+      "Which drum is played with a pedal in a drum kit?",
+    options: ["Tom Drum", "Bass Drum", "Snare Drum"],
+    answer: "Bass Drum",
+  },
+  {
+    question:
+      "What is the hi-hat in a drum set?",
+    options: ["A type of drum", "A pair of cymbals played with a pedal", "A tuning mechanism"],
+    answer: "A pair of cymbals played with a pedal",
+  },
+  {
+    question:
+      "What type of instrument is a piano classified as?",
+    options: ["String instrument", "Percussion instrument", "Wind instrument"],
+    answer: "Percussion instrument",
+  },
+];
+
+const count = 200,
+  defaultsOne = {
+    origin: { y: 0.7 },
+  };
+
+// const duration = 15 * 1000,
+//   animationEnd = Date.now() + duration,
+//   defaultsTwo = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+function fire(particleRatio, opts) {
+  confetti(
+    Object.assign({}, defaultsOne, opts, {
+      particleCount: Math.floor(count * particleRatio),
+    })
+  );
+}
+
+function fireWorks(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 setTimeout(() => {
   document.getElementById("splashScreen").style.display = "none";
 }, 2300);
 
+questions.forEach(() => {
+  circleParent
+    .appendChild(document.createElement("div"))
+    .classList.add("circle_status");
+});
+const circle = document.querySelectorAll(".circle_status");
+
+loadQuestion();
+
 function openModel(event) {
   modal.innerHTML = event;
+  switch (event) {
+    case "Piano":
+      console.log(event, "Piano");
+      PIANO.style.display = "flex";
+      DRUMS.style.display = "none";
+      break;
+
+    case "Drums":
+      console.log(event, "Drums");
+      DRUMS.style.display = "block";
+      PIANO.style.display = "none";
+      break;
+
+    default:
+      PIANO.style.display = "none";
+      DRUMS.style.display = "none";
+      break;
+  }
 }
 
-const keys = document.querySelectorAll(".key");
-
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-function playNote(note) {
-  const oscillator = audioContext.createOscillator();
-
-  const gainNode = audioContext.createGain();
-
-  const frequencies = {
-    C: 261.63,
-    "C#": 277.18,
-    D: 293.66,
-    "D#": 311.13,
-    E: 329.63,
-
-    F: 349.23,
-    "F#": 369.99,
-    G: 392.0,
-    "G#": 415.3,
-    A: 440.0,
-
-    "A#": 466.16,
-    B: 493.88,
-  };
-
-  oscillator.frequency.value = frequencies[note];
-
-  oscillator.type = "sine";
-
-  oscillator.connect(gainNode);
-
-  gainNode.connect(audioContext.destination);
-
-  gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
-
-  oscillator.start();
-
-  setTimeout(() => oscillator.stop(), 500);
-}
+const currentDevice = () => {
+  let device = navigator.userAgent;
+  if (device.includes("Android")) {
+    return "Android";
+  } else if (device.includes("iPhone")) {
+    return "iPhone";
+  } else {
+    return "Desktop";
+  }
+};
 
 keys.forEach((key) => {
-  key.addEventListener("click", () => playNote(key.dataset.note));
+  key.addEventListener("mousedown", () => {
+    if (currentDevice() === "Desktop") {
+      let note = key.getAttribute("data-note");
+      console.log(note);
+
+      let piano = new Audio(`./assets/sounds/piano/${note}.mp3`);
+      piano.currentTime = 0;
+      piano.play();
+    }
+    key.classList.contains("white")
+      ? key.classList.add("white_active")
+      : key.classList.add("black_active");
+  });
+
+  key.addEventListener("mouseup", () => {
+    key.classList.contains("white")
+      ? key.classList.remove("white_active")
+      : key.classList.remove("black_active");
+  });
+
+  key.addEventListener("touchstart", () => {
+    if (currentDevice() !== "Desktop") {
+      let note = key.getAttribute("data-note");
+      let piano = new Audio(`./assets/sounds/piano/${note}.mp3`);
+      piano.currentTime = 0;
+      piano.play();
+    }
+    key.classList.contains("white")
+      ? key.classList.add("white_active")
+      : key.classList.add("black_active");
+  });
+
+  key.addEventListener("touchend", () => {
+    key.classList.contains("white")
+      ? key.classList.remove("white_active")
+      : key.classList.remove("black_active");
+  });
 });
+
+const playSound = (keys) => {
+  console.log(keys);
+  let drums = new Audio(`./assets/sounds/drums/${keys}D.mp3`);
+  drums.currentTime = 0;
+  drums.play();
+};
+
+const openQuiz = () => {
+  glassModal.style.display = "block";
+  // loadQuestion();
+};
+
+function loadQuestion() {
+  // const circle = document.querySelectorAll(".circle_status");
+
+  circle.forEach((val) => {
+    val.classList.remove("active_circle");
+  });
+  circle[currentQuestion].classList.add("active_circle");
+  let question = questions[currentQuestion];
+  question_title.innerHTML = question.question;
+  const options = document.querySelectorAll(".option");
+
+  question.options.forEach((option, index) => {
+    options[index].textContent = option;
+  });
+}
+
+const checkAnswer = (option) => {
+  let question = questions[currentQuestion];
+  // const circle = document.querySelectorAll(".circle_status");
+
+  const optionsList = document.querySelectorAll(".option");
+  if (question.options[option] === question.answer) {
+    optionsList[option].classList.add("success");
+    fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+    });
+
+    fire(0.2, {
+      spread: 60,
+    });
+
+    fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8,
+    });
+
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2,
+    });
+
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+    });
+    score++;
+    circle[currentQuestion].classList.add("success");
+  } else {
+    optionsList[option].classList.add("error");
+    navigator.vibrate(200);
+    circle[currentQuestion].classList.add("error");
+    const correctOption = question.options.findIndex((val) => {
+      return val === question.answer;
+    });
+    optionsList[correctOption].classList.add("success");
+  }
+  optionsList.forEach((val) => {
+    val.setAttribute("disabled", true);
+  });
+  next.classList.add("enabled");
+};
+
+const nextQuestion = () => {
+  next.classList.remove("enabled");
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    loadQuestion();
+    const optionsList = document.querySelectorAll(".option");
+    optionsList.forEach((val) => {
+      val.classList.remove("success", "error");
+      val.removeAttribute("disabled");
+    });
+  } else {
+    const modalBody = document.querySelector(".glass_modal_body");
+    const imgElement = document.createElement("img");
+    imgElement.setAttribute("width", 200);
+    imgElement.setAttribute("height", 200);
+    imgElement.classList.add("img-fluid", "mx-auto", "d-block", "smily-img");
+
+    modalBody.appendChild(imgElement);
+
+    // next.style.display = "block";
+    finish.classList.add("enabled");
+    circleParent.replaceChildren();
+    if (score >= 1) {
+      fireWorksAnimation();
+      applause.play();
+      modalBody.querySelector(".smily-img").src = "./assets/gifs/happy.gif";
+    } else {
+      modalBody.querySelector(".smily-img").src = "./assets/gifs/moodOff.gif";
+    }
+    question_title.textContent = `Result`;
+    question_title.classList.add("result");
+    scoreResult.textContent = `You scored ${score} out of ${questions.length}`;
+    // document.querySelectorAll(".option").forEach((val) => {
+    //   val.style.display = "none";
+    // });
+    document.querySelector("#options").style.display = "none";
+    next.classList.remove("enabled");
+  }
+};
+
+const finished = () => {
+  location.reload();
+};
+
+const fireWorksAnimation = () => {
+  const duration = 15 * 1000,
+    animationEnd = Date.now() + duration,
+    defaultsTwo = { startVelocity: 20, spread: 180, ticks: 10, zIndex: 999 };
+  const interval = setInterval(function () {
+    const timeLeft = animationEnd - Date.now();
+    if (timeLeft <= 0) {
+      return clearInterval(interval);
+    }
+    const particleCount = 60 * (timeLeft / duration);
+
+    confetti(
+      Object.assign({}, defaultsTwo, {
+        particleCount,
+        origin: { x: Math.random(), y: Math.random() - 0.2 },
+        startVelocity: 45,
+        spread: 180,
+      })
+    );
+  }, 250);
+};

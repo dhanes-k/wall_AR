@@ -14,36 +14,168 @@
       href="./assets/bootstrap-5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
   </head>
 
   <body>
-    <div id="splashScreen"></div>
+    <!-- <div id="splashScreen"></div> -->
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <div class="piano">
-              <div class="key white" data-note="C">C</div>
-              <div class="key black" data-note="C#">C#</div>
-              <div class="key white" data-note="D">D</div>
-              <div class="key black" data-note="D#">D#</div>
-              <div class="key white" data-note="E">E</div>
-              <div class="key white" data-note="F">F</div>
-              <div class="key black" data-note="F#">F#</div>
-              <div class="key white" data-note="G">G</div>
-              <div class="key black" data-note="G#">G#</div>
-              <div class="key white" data-note="A">A</div>
-              <div class="key black" data-note="A#">A#</div>
-              <div class="key white" data-note="B">B</div>
-              </div>
+              <div class="key white" data-note="1"></div>
+              <div class="key black" data-note="2"></div>
+              <div class="key white" data-note="3"></div>
+              <div class="key black" data-note="4"></div>
+              <div class="key white" data-note="5"></div>
+              <div class="key white" data-note="6"></div>
+              <div class="key black" data-note="7"></div>
+              <div class="key white" data-note="8"></div>
+              <div class="key black" data-note="9"></div>
+              <div class="key white" data-note="10"></div>
+              <div class="key black" data-note="11"></div>
+              <div class="key white" data-note="12"></div>
+            </div>
+            <div class="drums">
+              <!-- <img src="./assets/img/drums.webp" alt=""> -->
+              <svg
+                style="width: 100%"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 2048 1534"
+              >
+                <style>
+                  .image-mapper-shape {
+                    fill: rgba(0, 0, 0, 0);
+                  }
+                  g:hover .image-mapper-shape {
+                    stroke: white;
+                    stroke-width: 2px;
+                    opacity: 20%;
+                  }
+                </style>
+
+                <image
+                  xlink:href="./assets/img/drums.webp"
+                  style="width: 2048px"
+                ></image>
+                <!-- <a xlink:href="JavaScript:void(0)" xlink:title="">
+                  <g>
+                    <polygon onclick="playSound('drum2')"
+                      class="image-mapper-shape polygon_drum2"
+                      data-index="1"
+                      points="373.424 124.475 346.196 140.034 330.636 155.594 328.691 175.043 338.416 194.492 353.975 211.996 371.48 223.666 396.764 235.335 420.103 245.06 447.331 254.784 482.34 264.509 517.349 270.344 556.247 276.179 604.87 278.123 653.493 276.179 686.557 270.344 721.565 258.674 742.959 239.225 742.959 213.941 729.345 194.492 706.006 171.153 670.997 157.538 635.989 143.924 602.925 132.255 530.963 118.64 457.056 114.75"
+                    ></polygon>
+                  </g>
+                </a> -->
+                <a xlink:href="JavaScript:void(0)" xlink:title="">
+                  <g>
+                    <polygon
+                      onclick="playSound('1')"
+                      class="image-mapper-shape"
+                      data-index="1"
+                      points="324.802 254.784 334.526 289.793 338.416 313.132 375.369 320.912 338.416 328.691 338.416 353.975 373.424 363.7 427.882 355.92 466.781 363.7 501.789 365.645 527.073 375.369 536.798 404.543 517.349 422.047 472.615 429.827 410.378 437.607 359.81 441.497 317.022 441.497 282.013 441.497 245.06 445.387 196.437 447.331 159.483 441.497 132.255 429.827 118.64 416.213 126.42 396.764 305.352 353.975"
+                    ></polygon>
+                  </g>
+                </a>
+                <a xlink:href="JavaScript:void(0)" xlink:title="">
+                  <g>
+                    <polygon
+                      onclick="playSound('2')"
+                      class="image-mapper-shape"
+                      data-index="2"
+                      points="361.755 130.31 402.598 118.64 457.056 114.75 495.954 116.695 556.247 120.585 595.145 130.31 645.713 143.924 690.446 165.318 731.29 192.547 742.959 221.721 735.18 248.95 690.446 270.344 643.768 276.179 599.035 283.958 554.302 280.068 507.624 272.289 460.946 260.619 406.488 243.115 357.865 213.941 328.691 190.602 326.746 155.594"
+                    ></polygon>
+                  </g>
+                </a>
+                <a xlink:href="JavaScript:void(0)" xlink:title="">
+                  <g>
+                    <polygon
+                      onclick="playSound('3')"
+                      class="image-mapper-shape"
+                      data-index="3"
+                      points="1005.52 390.929 1017.19 410.378 1017.19 437.607 1001.63 466.781 982.184 482.34 958.845 490.12 931.616 499.844 910.222 503.734 882.993 503.734 861.599 503.734 844.095 513.459 809.086 501.789 787.692 482.34 762.408 460.946 752.684 441.497 737.124 410.378 742.959 390.929 762.408 365.645 785.747 350.085 803.252 342.306 826.591 326.746 853.82 322.857 886.883 324.802 921.892 326.746 953.01 340.361 986.074 359.81 989.964 375.369"
+                    ></polygon>
+                  </g>
+                </a>
+                <a xlink:href="JavaScript:void(0)" xlink:title="">
+                  <g>
+                    <polygon
+                      onclick="playSound('4')"
+                      class="image-mapper-shape"
+                      data-index="4"
+                      points="1073.6 369.535 1102.77 342.306 1135.83 324.802 1161.12 311.187 1194.18 299.518 1229.19 297.573 1268.09 295.628 1314.77 311.187 1347.83 324.802 1369.22 348.141 1386.73 379.259 1382.84 410.378 1369.22 439.552 1343.94 460.946 1316.71 472.615 1283.65 484.285 1244.75 484.285 1213.63 488.175 1180.57 486.23 1145.56 480.395 1118.33 468.726 1091.1 453.166 1061.93 431.772 1056.09 398.708"
+                    ></polygon>
+                  </g>
+                </a>
+                <a xlink:href="JavaScript:void(0)" xlink:title="">
+                  <g>
+                    <polygon
+                      onclick="playSound('5')"
+                      class="image-mapper-shape"
+                      data-index="5"
+                      points="1657.07 241.17 1618.17 243.115 1577.33 258.674 1534.54 266.454 1499.53 270.344 1464.52 270.344 1412.01 270.344 1355.61 270.344 1308.93 262.564 1277.81 239.225 1250.58 206.161 1248.64 176.988 1266.14 153.649 1279.76 138.089 1303.1 118.64 1336.16 101.136 1378.95 85.5764 1417.85 71.962 1460.63 60.2925 1503.42 52.5128 1553.99 44.7331 1590.94 44.7331 1647.35 44.7331 1690.13 52.5128 1721.25 58.3476 1760.15 77.7968 1789.33 99.1909 1791.27 130.31 1779.6 157.538 1746.54 184.767 1715.42 215.886 1690.13 229.5"
+                    ></polygon>
+                  </g>
+                </a>
+                <a xlink:href="JavaScript:void(0)" xlink:title="">
+                  <g>
+                    <polygon
+                      onclick="playSound('6')"
+                      class="image-mapper-shape"
+                      data-index="6"
+                      points="1412.01 649.603 1439.24 647.658 1472.3 647.658 1497.59 649.603 1520.93 649.603 1546.21 653.493 1571.49 659.328 1596.78 661.273 1624.01 667.107 1649.29 674.887 1674.58 678.777 1692.08 694.336 1703.75 711.84 1697.91 733.235 1688.19 752.684 1657.07 764.353 1629.84 772.133 1608.45 776.023 1581.22 783.802 1553.99 787.692 1528.71 787.692 1499.53 785.747 1460.63 779.913 1421.74 777.968 1378.95 774.078 1345.88 770.188 1310.88 760.463 1273.92 741.014 1250.58 719.62 1240.86 694.336 1258.36 676.832 1287.54 659.328 1324.49 653.493 1343.94 649.603 1371.17 645.713 1390.62 643.768"
+                    ></polygon>
+                  </g>
+                </a>
+                <a xlink:href="JavaScript:void(0)" xlink:title="">
+                  <g>
+                    <polygon
+                      onclick="playSound('7')"
+                      class="image-mapper-shape"
+                      data-index="7"
+                      points="1021.08 717.675 1050.26 717.675 1073.6 717.675 1094.99 719.62 1116.38 719.62 1137.78 729.345 1168.9 739.069 1194.18 746.849 1217.52 758.518 1244.75 772.133 1254.47 842.15 1250.58 805.197 1227.24 949.121 972.46 772.133 945.231 855.764 921.892 873.269 886.883 886.883 853.82 890.773 809.086 898.553 783.802 890.773 760.463 904.387 754.629 943.286 746.849 974.405 746.849 1013.3 768.243 1071.65 791.582 1100.82 818.811 1126.11 857.709 1161.12 894.663 1180.57 933.561 1192.24 962.735 1200.02 1011.36 1211.68 1085.27 1203.91 1131.94 1190.29 1172.79 1174.73 1219.46 1151.39 1235.02 1130 1254.47 1100.82 1229.19 1063.87 1221.41 974.405 1203.91 939.396 970.515 774.078 989.964 719.62 972.46 741.014 941.341 645.713 873.269 776.023"
+                    ></polygon>
+                  </g>
+                </a>
+                <a xlink:href="JavaScript:void(0)" xlink:title="">
+                  <g>
+                    <polygon
+                      onclick="playSound('8')"
+                      class="image-mapper-shape"
+                      data-index="8"
+                      points="986.074 721.565 929.671 744.904 886.883 760.463 849.93 776.023 785.747 764.353 750.739 766.298 696.281 754.629 628.209 717.675 591.255 688.501 569.861 637.934 604.87 600.98 624.319 585.421 657.383 575.696 690.446 565.971 721.565 565.971 754.629 569.861 787.692 577.641 822.701 585.421 861.599 597.09 900.498 612.65 927.727 626.264 954.955 645.713 970.515 665.162"
+                    ></polygon>
+                  </g>
+                </a>
+              </svg>
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
@@ -62,7 +194,11 @@
               class="AR_arrow"
             />
           </button> -->
-          <button type="button" class="spacebtn" onclick="location.href='https://dhanes-k.github.io/reality/'">
+          <button
+            type="button"
+            class="spacebtn"
+            onclick="location.href='https://dhanes-k.github.io/reality/'"
+          >
             <strong
               >Start with AR
               <img src="./assets/img/rightarrow.svg" alt="" class="AR_arrow"
@@ -80,23 +216,43 @@
         <div class="main_menu my-4">
           <div class="row w-100 h-100">
             <div class="col-6">
-              <div class="card" onclick="openModel('Piano')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <div
+                class="card"
+                onclick="openModel('Piano')"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
                 <img src="./assets/img/piano.svg" value="PIANO" alt="piano" />
               </div>
             </div>
             <div class="col-6">
-              <div class="card" onclick="openModel('Drums')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <div
+                class="card"
+                onclick="openModel('Drums')"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
                 <img src="./assets/img/drums.svg" value="DRUMS" alt="drums" />
               </div>
             </div>
             <div class="col-6">
-              <div class="card" onclick="openModel('Guitar')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <div
+                class="card"
+                onclick="openModel('Guitar')"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
                 <img src="./assets/img/guitar.svg" value="GUITAR" alt="drums" />
               </div>
             </div>
             <div class="col-6 card_singer">
               <div class="card_one">
-                <div class="row w-100 h-100" onclick="openModel('M. S. Subbulakshmi')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div
+                  class="row w-100 h-100"
+                  onclick="openModel('M. S. Subbulakshmi')"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
                   <div class="col-4 p-0 m-0">
                     <img
                       src="./assets/img/m-s-subbulakshmi(2).jpg"
@@ -106,17 +262,22 @@
                   </div>
                   <div class="col-8 Singer_desc">
                     <small class="text-body-content"
-                      >M. S. Subbulakshmi <br> 
+                      >M. S. Subbulakshmi <br />
                       Indian singer
                     </small>
                   </div>
                 </div>
               </div>
               <div class="col-12 px-3">
-                <hr>
+                <hr />
               </div>
               <div class="card_two">
-                <div class="row w-100 h-100" onclick="openModel('K. J. Yesudas')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div
+                  class="row w-100 h-100"
+                  onclick="openModel('K. J. Yesudas')"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
                   <div class="col-4 p-0 m-0">
                     <img
                       src="./assets/img/yesudas.jpg"
@@ -135,14 +296,82 @@
           </div>
         </div>
         <div class="orderNow mt-2">
-          <button class="btn btn-success btn-shadow">
-            <a href="https://www.sangeethasdesimane.com/" target="_blank"
+          <!-- <button class="btn btn-success btn-shadow">
+            <a href="https://www.sangeethaveg.com/" target="_blank"
               >Order Now &nbsp;<span class="orderNowArrow"></span
             ></a>
+          </button> -->
+          <button class="btn btn-success btn-shadow" onclick="openQuiz()">
+            Quiz
           </button>
         </div>
       </div>
     </section>
+    <div class="glass_modal">
+      <div class="row p-0 m-0 glass_modal_conatiner">
+        <div class="col-12 glass_modal_header">
+          <h5 class="text-center mt-3">Guess What?</h5>
+          <div
+            class="text-center d-flex justify-content-center mt-3 circle_parent"
+          ></div>
+        </div>
+        <div class="col-12 glass_modal_body my-2 py-2">
+          <div>
+            <p
+              class="question text-center fw-semibold "
+              style="font-family: 'Tangerine', serif"
+            ></p>
+          </div>
+          <div>
+            <p class="text-center fw-bold score"></p>
+          </div>
+          <ul id="options" class="list-group list-group-numbered">
+            <li>
+              <button
+                class="list-group-item my-2 mx-auto glass option"
+                onclick="checkAnswer(0)"
+              ></button>
+            </li>
+            <li>
+              <button
+                class="list-group-item my-2 mx-auto glass option"
+                onclick="checkAnswer(1)"
+              ></button>
+            </li>
+            <li>
+              <button
+                class="list-group-item my-2 mx-auto glass option"
+                onclick="checkAnswer(2)"
+              ></button>
+            </li>
+          </ul>
+          <!-- <img
+            src="./assets/gifs/happy.gif"
+            class="img-fluid mx-auto d-block"
+            width="200"
+            height="200"
+            alt=""
+          /> -->
+        </div>
+        <div class="col-12 glass_modal_footer">
+          <!-- <button class="btn btn-primary" id="next" onclick="nextQuestion()">
+            Next
+          </button> -->
+          <button
+            class="list-group-item mx-auto w-50 glass next"
+            onclick="nextQuestion()"
+          >
+            Next
+          </button>
+          <button
+            class="list-group-item mx-auto w-50 glass finish"
+            onclick="finished()"
+          >
+            Finish
+          </button>
+        </div>
+      </div>
+    </div>
 
     <script src="./assets/bootstrap-5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./index.js"></script>
