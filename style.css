@@ -454,6 +454,7 @@ strong {
   border: 2px solid var(--white);
   border-radius: 14px;
   overflow: hidden;
+  display: none;
 }
 
 .glass{
@@ -680,7 +681,6 @@ strong {
     width: 80%;
     height: 500px;
     min-height: 400px;
-    display: none;
   }
 
   .result,.question,.glass{
