@@ -289,7 +289,7 @@ const nextQuestion = () => {
     } else {
       modalBody.querySelector(".smily-img").src = "./assets/gifs/moodOff.gif";
     }
-    question_title.textContent = `Result`;
+    question_title.textContent = `Surprise Surprise`;
     question_title.classList.add("result");
     scoreResult.textContent = `You scored ${score} out of ${questions.length}`;
     // document.querySelectorAll(".option").forEach((val) => {
