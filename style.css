@@ -476,6 +476,11 @@ strong {
   display: none;
 }
 
+.start-with-ar{
+  text-decoration: none;
+  color: var(--white);
+}
+
 .glass{
   border: 1px solid var(--white) !important;
   background-color: rgba(255, 255, 255, 0.055) !important;
@@ -719,4 +724,94 @@ strong {
   .text-body-content {
     font-size: 2.4vw !important;
   }
+}
+/* Ms Subba Lakshmi */
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  color: white;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.profile-img {
+  width: 60px;  
+  height: 60px; 
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.profile-info h2 {
+  font-size: 18px;
+  margin: 0;
+}
+.profile-info p {
+  font-size: 14px;
+  color: #aaa;
+}
+.now-playing {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.now-playing-info h3 {
+  font-size: 18px;
+  margin: 0;
+}
+.now-playing-info p {
+  font-size: 14px;
+  color: #aaa;
+}
+.playlist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+}
+.playlist li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  align-items: left;
+}
+.playlist li:hover {
+  background-color: #1db954; /* Spotify Green */
+}
+.playlist-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.song-info h4 {
+  margin: 0;
+  font-size: 16px;
+}
+.song-info p {
+  margin: 0;
+  color: #aaa;
+}
+.playPauseBtn {
+  background: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: auto;
+}
+.control-btn:hover {
+  background-color: #1ed760;
 }

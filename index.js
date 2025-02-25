@@ -446,3 +446,82 @@ const fireWorksAnimation = () => {
     );
   }, 250);
 };
+// MS subba lakshmi code//
+document.addEventListener("DOMContentLoaded", function () {
+  function setupPlayer(modalId, audioPlayerId) {
+      const modal = document.getElementById(modalId);
+      const audioPlayer = document.getElementById(audioPlayerId);
+      const playlist = modal.querySelector(".playlist");
+
+      let currentSongIndex = -1;
+
+      // Event delegation for playlist click events
+      playlist.addEventListener("click", function (event) {
+          const item = event.target.closest("li");
+          if (!item) return;
+
+          const playPauseBtn = item.querySelector(".playPauseBtn");
+
+          if (playPauseBtn.contains(event.target)) {
+              togglePlayPause(item);
+          } else {
+              playSong(Array.from(playlist.children).indexOf(item));
+          }
+      });
+
+      function togglePlayPause(item) {
+          const index = Array.from(playlist.children).indexOf(item);
+
+          if (currentSongIndex === index) {
+              if (audioPlayer.paused) {
+                  audioPlayer.play();
+                  updateUIState(item, true);
+              } else {
+                  audioPlayer.pause();
+                  updateUIState(item, false);
+              }
+          } else {
+              playSong(index);
+          }
+      }
+
+      function playSong(index) {
+          if (currentSongIndex !== -1) {
+              updateUIState(playlist.children[currentSongIndex], false);
+          }
+
+          currentSongIndex = index;
+          const selectedSong = playlist.children[index].getAttribute("data-src");
+
+          audioPlayer.src = selectedSong;
+          audioPlayer.play();
+          updateUIState(playlist.children[index], true);
+      }
+
+      function updateUIState(item, isPlaying) {
+          const button = item.querySelector(".playPauseBtn");
+          button.textContent = isPlaying ? "⏸" : "▶";
+
+          if (isPlaying) {
+              item.classList.add("playing");
+          } else {
+              item.classList.remove("playing");
+          }
+      }
+
+      // **Play next song when current song ends**
+      audioPlayer.addEventListener("ended", function () {
+          if (currentSongIndex < playlist.children.length - 1) {
+              playSong(currentSongIndex + 1);
+          } else {
+              // Reset UI when the last song finishes
+              updateUIState(playlist.children[currentSongIndex], false);
+              currentSongIndex = -1;
+          }
+      });
+  }
+
+  // Setup players for both modals
+  setupPlayer("subbuModal", "ms-audio-player");
+  setupPlayer("yesudasModal", "yesudas-audio-player");
+});
