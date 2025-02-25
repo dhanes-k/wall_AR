@@ -1,6 +1,7 @@
 const modal = document.querySelector("#exampleModalLabel");
 const PIANO = document.querySelector(".piano");
 const DRUMS = document.querySelector(".drums");
+const SITAR = document.querySelector(".sitar");
 const keys = document.querySelectorAll(".key");
 const glassModal = document.querySelector(".glass_modal");
 const next = document.querySelector(".next");
@@ -56,20 +57,21 @@ let questions = [
     answer: "Taraf",
   },
   {
-    question:
-      "Which drum is played with a pedal in a drum kit?",
+    question: "Which drum is played with a pedal in a drum kit?",
     options: ["Tom Drum", "Bass Drum", "Snare Drum"],
     answer: "Bass Drum",
   },
   {
-    question:
-      "What is the hi-hat in a drum set?",
-    options: ["A type of drum", "A pair of cymbals played with a pedal", "A tuning mechanism"],
+    question: "What is the hi-hat in a drum set?",
+    options: [
+      "A type of drum",
+      "A pair of cymbals played with a pedal",
+      "A tuning mechanism",
+    ],
     answer: "A pair of cymbals played with a pedal",
   },
   {
-    question:
-      "What type of instrument is a piano classified as?",
+    question: "What type of instrument is a piano classified as?",
     options: ["String instrument", "Percussion instrument", "Wind instrument"],
     answer: "Percussion instrument",
   },
@@ -98,7 +100,7 @@ function fireWorks(min, max) {
 
 setTimeout(() => {
   document.getElementById("splashScreen").style.display = "none";
-}, 2300);
+}, 3800);
 
 questions.forEach(() => {
   circleParent
@@ -116,17 +118,27 @@ function openModel(event) {
       console.log(event, "Piano");
       PIANO.style.display = "flex";
       DRUMS.style.display = "none";
+      SITAR.style.display = "none";
       break;
 
     case "Drums":
       console.log(event, "Drums");
-      DRUMS.style.display = "block";
+      DRUMS.style.display = "flex";
       PIANO.style.display = "none";
+      SITAR.style.display = "none";
+      break;
+
+    case "Sitar":
+      console.log(event, "Sitar");
+      SITAR.style.display = "flex";
+      PIANO.style.display = "none";
+      DRUMS.style.display = "none";
       break;
 
     default:
       PIANO.style.display = "none";
       DRUMS.style.display = "none";
+      SITAR.style.display = "none";
       break;
   }
 }
@@ -142,51 +154,159 @@ const currentDevice = () => {
   }
 };
 
+// keys.forEach((key) => {
+//   key.addEventListener("mousedown", () => {
+//     if (currentDevice() === "Desktop") {
+//       let note = key.getAttribute("data-note");
+//       console.log(note);
+
+//       let piano = new Audio(`./assets/sounds/piano/${note}.mp3`);
+//       piano.currentTime = 0;
+//       piano.play();
+//     }
+//     key.classList.contains("white")
+//       ? key.classList.add("white_active")
+//       : key.classList.add("black_active");
+//   });
+
+//   key.addEventListener("mouseup", () => {
+//     key.classList.contains("white")
+//       ? key.classList.remove("white_active")
+//       : key.classList.remove("black_active");
+//   });
+
+//   key.addEventListener("touchstart", () => {
+//     if (currentDevice() !== "Desktop") {
+//       let note = key.getAttribute("data-note");
+//       let piano = new Audio(`./assets/sounds/piano/${note}.mp3`);
+//       piano.currentTime = 0;
+//       piano.play();
+//     }
+//     key.classList.contains("white")
+//       ? key.classList.add("white_active")
+//       : key.classList.add("black_active");
+//   });
+
+//   key.addEventListener("touchend", () => {
+//     key.classList.contains("white")
+//       ? key.classList.remove("white_active")
+//       : key.classList.remove("black_active");
+//   });
+
+// });
 keys.forEach((key) => {
+  let startTouchX = 0;
+  let endTouchX = 0;
+  let isTouching = false;
+  let lastKeyTouched = null;
+  let alreadyPlayedKeys = new Set();
+
+  // Play sound when a key is pressed (Desktop and Mobile)
+  function playSound(note) {
+    let piano = new Audio(`./assets/sounds/piano/${note}.mp3`);
+    piano.currentTime = 0;
+    piano.play();
+  }
+
+  // Desktop mouse events
   key.addEventListener("mousedown", () => {
     if (currentDevice() === "Desktop") {
       let note = key.getAttribute("data-note");
-      console.log(note);
-
-      let piano = new Audio(`./assets/sounds/piano/${note}.mp3`);
-      piano.currentTime = 0;
-      piano.play();
+      playSound(note);
     }
-    key.classList.contains("white")
-      ? key.classList.add("white_active")
-      : key.classList.add("black_active");
+    key.classList.add(
+      key.classList.contains("white") ? "white_active" : "black_active"
+    );
   });
 
   key.addEventListener("mouseup", () => {
-    key.classList.contains("white")
-      ? key.classList.remove("white_active")
-      : key.classList.remove("black_active");
+    key.classList.remove(
+      key.classList.contains("white") ? "white_active" : "black_active"
+    );
   });
 
-  key.addEventListener("touchstart", () => {
+  // Mobile touch events
+  key.addEventListener("touchstart", (event) => {
     if (currentDevice() !== "Desktop") {
       let note = key.getAttribute("data-note");
-      let piano = new Audio(`./assets/sounds/piano/${note}.mp3`);
-      piano.currentTime = 0;
-      piano.play();
+      playSound(note);
     }
-    key.classList.contains("white")
-      ? key.classList.add("white_active")
-      : key.classList.add("black_active");
+    key.classList.add(
+      key.classList.contains("white") ? "white_active" : "black_active"
+    );
+
+    // Track starting position of the touch
+    startTouchX = event.touches[0].clientX;
+    isTouching = true; // mark as touch started
+    lastKeyTouched = key; // Store the key that was first touched
+    alreadyPlayedKeys.clear(); // Clear the played keys when touch starts
   });
 
   key.addEventListener("touchend", () => {
-    key.classList.contains("white")
-      ? key.classList.remove("white_active")
-      : key.classList.remove("black_active");
+    key.classList.remove(
+      key.classList.contains("white") ? "white_active" : "black_active"
+    );
+    isTouching = false; // mark touch as ended
   });
+
+  // Detect swipe on mobile
+  key.addEventListener("touchmove", (event) => {
+    if (!isTouching) return;
+
+    endTouchX = event.touches[0].clientX;
+    if (Math.abs(endTouchX - startTouchX) > 50) {
+      handleSwipe(event);
+
+      keys.forEach((key) => {
+        if (isKeyUnderTouch(event.touches[0].clientX, key)) {
+          if (!alreadyPlayedKeys.has(key)) {
+            let note = key.getAttribute("data-note");
+            playSound(note);
+            alreadyPlayedKeys.add(key);
+          }
+          key.classList.add(
+            key.classList.contains("white") ? "white_active" : "black_active"
+          );
+        } else {
+          key.classList.remove(
+            key.classList.contains("white") ? "white_active" : "black_active"
+          );
+        }
+      });
+    }
+  });
+
+  // Helper function to check if the touch is over the current key
+  function isKeyUnderTouch(touchX, key) {
+    const keyRect = key.getBoundingClientRect();
+    return touchX >= keyRect.left && touchX <= keyRect.right;
+  }
+
+  // Handle swipe direction logic (optional, for additional functionality)
+  function handleSwipe(event) {
+    if (endTouchX > startTouchX) {
+      console.log("Swipe Right");
+      // You can add your action here (e.g., play next note)
+    } else {
+      console.log("Swipe Left");
+      // You can add your action here (e.g., play previous note)
+    }
+
+    // Reset swipe start and end positions after swipe action
+    startTouchX = 0;
+    endTouchX = 0;
+  }
 });
 
 const playSound = (keys) => {
-  console.log(keys);
   let drums = new Audio(`./assets/sounds/drums/${keys}D.mp3`);
   drums.currentTime = 0;
   drums.play();
+};
+const playSitar = (keys) => {
+  let sitar = new Audio(`./assets/sounds/sitar/s${keys}.mp3`);
+  sitar.currentTime = 0;
+  sitar.play();
 };
 
 const openQuiz = () => {
@@ -217,6 +337,7 @@ const checkAnswer = (option) => {
   const optionsList = document.querySelectorAll(".option");
   if (question.options[option] === question.answer) {
     optionsList[option].classList.add("success");
+    new Audio('./assets/sounds/bubble.mp3').play();
     fire(0.25, {
       spread: 26,
       startVelocity: 55,
