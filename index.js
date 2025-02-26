@@ -454,9 +454,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const audioPlayer = document.getElementById(audioPlayerId);
       const playlist = modal.querySelector(".playlist");
 
+      if (!playlist) return; // Exit if no playlist found
+
       let currentSongIndex = -1;
 
-      // Event delegation for playlist click events
+      // Handle playlist item click
       playlist.addEventListener("click", function (event) {
           const item = event.target.closest("li");
           if (!item) return;
@@ -470,6 +472,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
       });
 
+      // Toggle between play/pause for the selected song
       function togglePlayPause(item) {
           const index = Array.from(playlist.children).indexOf(item);
 
@@ -486,6 +489,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
       }
 
+      // Play the selected song
       function playSong(index) {
           if (currentSongIndex !== -1) {
               updateUIState(playlist.children[currentSongIndex], false);
@@ -494,23 +498,22 @@ document.addEventListener("DOMContentLoaded", function () {
           currentSongIndex = index;
           const selectedSong = playlist.children[index].getAttribute("data-src");
 
-          audioPlayer.src = selectedSong;
+          if (audioPlayer.src !== selectedSong) {
+              audioPlayer.src = selectedSong;
+          }
           audioPlayer.play();
           updateUIState(playlist.children[index], true);
       }
 
+      // Update UI state for play/pause button
       function updateUIState(item, isPlaying) {
           const button = item.querySelector(".playPauseBtn");
           button.textContent = isPlaying ? "⏸" : "▶";
 
-          if (isPlaying) {
-              item.classList.add("playing");
-          } else {
-              item.classList.remove("playing");
-          }
+          item.classList.toggle("playing", isPlaying);
       }
 
-      // **Play next song when current song ends**
+      // Play next song when the current song ends
       audioPlayer.addEventListener("ended", function () {
           if (currentSongIndex < playlist.children.length - 1) {
               playSong(currentSongIndex + 1);
@@ -519,6 +522,21 @@ document.addEventListener("DOMContentLoaded", function () {
               updateUIState(playlist.children[currentSongIndex], false);
               currentSongIndex = -1;
           }
+      });
+
+      // Stop audio and reset UI when modal is closed
+      modal.addEventListener("hidden.bs.modal", function () {
+          audioPlayer.pause();
+          audioPlayer.currentTime = 0;
+
+          playlist.querySelectorAll(".playPauseBtn").forEach((btn) => {
+              btn.textContent = "▶";
+          });
+
+          if (currentSongIndex !== -1) {
+              playlist.children[currentSongIndex].classList.remove("playing");
+          }
+          currentSongIndex = -1;
       });
   }
 
