@@ -14,6 +14,11 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+    <link
+      href="./assets/bootstrap-5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
 
     <!-- Link to Custom JavaScript and CSS Files -->
     <link rel="stylesheet" href="./ar.css" />
@@ -102,7 +107,7 @@
   <!-- Scanning Overlay for AR Image Detection -->
   <div id="example-scanning-overlay" class="hidden">
     <div class="inner">
-      <img src="./assets/img/Wall.jpg" alt="Scanning Target" />
+      <img src="./assets/img/sitarTrack.jpg" alt="Scanning Target" />
       <div class="scanline"></div>
     </div>
   </div>
@@ -110,8 +115,80 @@
   <!-- Image Buttons -->
   <div class="scan-buttons">
     <img src="./assets/img/image1.png" alt="Button 1" onclick="showDialog('./assets/img/image1.png', 'This is the first button content.')" />
-    <img src="./assets/img/image2.png" alt="Button 2" onclick="showDialog('./assets/img/image2.png', 'This is the second button content.')" />
+    <img src="./assets/img/image2.png" alt="Button 2" onclick="openQuiz()" />
   </div>
+
+  <!-- <div class="quizConatiner"> -->
+      <div class="glass_modal">
+        <div class="row p-0 m-0 glass_modal_conatiner">
+          <div class="col-12 glass_modal_header">
+            <div>
+                <h5 class="text-center mt-3 text-dark">
+                    Guess What?
+                </h5>
+            </div>
+            <div
+              class="text-center d-flex justify-content-center mt-3 circle_parent"
+            ></div>
+          </div>
+          <div class="col-12 glass_modal_body my-2 py-2">
+            <div>
+              <p
+                class="question text-center text-dark fw-semibold"
+                style="font-family: 'Tangerine', serif"
+              ></p>
+            </div>
+            <div>
+              <p class="text-center fw-bold score"></p>
+            </div>
+            <ul id="options" class="list-group list-group-numbered">
+              <li>
+                <button
+                  class="list-group-item my-2 mx-auto glass option"
+                  onclick="checkAnswer(0)"
+                ></button>
+              </li>
+              <li>
+                <button
+                  class="list-group-item my-2 mx-auto glass option"
+                  onclick="checkAnswer(1)"
+                ></button>
+              </li>
+              <li>
+                <button
+                  class="list-group-item my-2 mx-auto glass option"
+                  onclick="checkAnswer(2)"
+                ></button>
+              </li>
+            </ul>
+            <!-- <img
+              src="./assets/gifs/happy.gif"
+              class="img-fluid mx-auto d-block"
+              width="200"
+              height="200"
+              alt=""
+            /> -->
+          </div>
+          <div class="col-12 glass_modal_footer">
+            <!-- <button class="btn btn-primary" id="next" onclick="nextQuestion()">
+              Next
+            </button> -->
+            <button
+              class="list-group-item mx-auto w-50 glass next"
+              onclick="nextQuestion()"
+            >
+              Next
+            </button>
+            <button
+              class="list-group-item mx-auto w-50 glass finish"
+              onclick="finished()"
+            >
+              Finish
+            </button>
+          </div>
+        </div>
+      </div>
+  <!-- </div> -->
 
   <!-- Dialog Box -->
   <div id="dialogBox" class="dialog-box">
@@ -122,7 +199,7 @@
 
   <!-- A-Frame Scene -->
   <a-scene 
-      mindar-image="imageTargetSrc: ./assets/target/wall.mind; filterMinCF: 0.0001; filterBeta: 1; uiScanning: #example-scanning-overlay"
+      mindar-image="imageTargetSrc: ./assets/target/targets.mind; filterMinCF: 0.0001; filterBeta: 1; uiScanning: #example-scanning-overlay"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights: true"
       vr-mode-ui="enabled: false"
@@ -133,7 +210,7 @@
 
       <!-- Assets -->
       <a-assets>
-          <a-asset-item id="model1" src="./assets/glb/sitar1.glb"></a-asset-item>
+          <a-asset-item id="model1" src="./assets/glb/sitar_new.glb"></a-asset-item>
       </a-assets>
 
       <!-- Camera -->
@@ -152,27 +229,17 @@
               gltf-model="#model1"
               rotation="0 -90 0"
               position="0 -0.1 -0.3"
-              scale="0.1 0.1 0.1"
+              scale="0.01 0.01 0.01"
               gesture-handler
               animation-mixer>
           </a-entity>
       </a-entity>
   </a-scene>
 
-  <!-- JavaScript -->
-  <script>
-      function showDialog(imageSrc, textContent) {
-          document.getElementById("dialogImage").src = imageSrc;
-          document.getElementById("dialogText").innerText = textContent;
-          document.getElementById("dialogBox").style.display = "block";
-      }
+ 
 
-      function closeDialog() {
-          document.getElementById("dialogBox").style.display = "none";
-      }
-  </script>
-
-  <script src="./index.js"></script>
+  <script src="./assets/bootstrap-5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./ar.js"></script>
 
 </body>
 </html>

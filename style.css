@@ -36,6 +36,7 @@ h6 {
   top: 0;
   left: 0;
   overflow: hidden;
+  opacity: 1;
 }
 .sangeethaImg{
   animation: sangeetha_logo 2s linear;
@@ -660,6 +661,17 @@ strong {
 
 @keyframes ani {
   0% {
+    opacity: 1;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* @keyframes ani {
+  0% {
     transform: translate(0);
   }
   15% {
@@ -674,7 +686,7 @@ strong {
   100% {
     transform: translateX(100%);
   }
-}
+} */
 
 @media only screen and (max-width: 768px) {
   .homeScreen {

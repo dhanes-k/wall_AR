@@ -100,7 +100,7 @@ function fireWorks(min, max) {
 
 setTimeout(() => {
   document.getElementById("splashScreen").style.display = "none";
-}, 3800);
+}, 3600);
 
 questions.forEach(() => {
   circleParent
@@ -112,7 +112,8 @@ const circle = document.querySelectorAll(".circle_status");
 loadQuestion();
 
 function openModel(event) {
-  modal.innerHTML = event;
+  console.log(event,'dfghj')
+  modal.textContent = event;
   switch (event) {
     case "Piano":
       console.log(event, "Piano");
