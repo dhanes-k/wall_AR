@@ -1,4 +1,4 @@
-const glassModal = document.querySelector(".quizConatiner");
+const glassModal = document.querySelector(".glass_modal");
 const next = document.querySelector(".next");
 const finish = document.querySelector(".finish");
 const circleParent = document.querySelector(".circle_parent");
