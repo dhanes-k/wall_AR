@@ -359,6 +359,10 @@
     .result,.question,.glass{
       font-size: 4.4vw;
     }
+    .scan-buttons img {
+      width: 50px !important;
+      height: 50px !important;
+    }
   }
   
   @media only screen and (max-width: 576px) {

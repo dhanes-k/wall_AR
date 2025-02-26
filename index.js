@@ -100,7 +100,7 @@ function fireWorks(min, max) {
 
 setTimeout(() => {
   document.getElementById("splashScreen").style.display = "none";
-}, 3600);
+}, 3500);
 
 questions.forEach(() => {
   circleParent
