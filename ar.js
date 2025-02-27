@@ -24,52 +24,52 @@ let questions = [
     options: ["India", "Pakistan", "Afghanistan"],
     answer: "India",
   },
-  // {
-  //   question: "What is the main string of a sitar called?",
-  //   options: ["Gandhar", "Chikari", "Badhani"],
-  //   answer: "Chikari",
-  // },
-  // {
-  //   question:
-  //     "Which Indian classical music tradition is the sitar most commonly associated with?",
-  //   options: ["Hindustani", "Carnatic", "Dhrupad"],
-  //   answer: "Hindustani",
-  // },
-  // {
-  //   question: "Which famous sitar player performed at Woodstock in 1969?",
-  //   options: ["Anoushka Shankar", "Ravi Shankar", "Ustad Vilayat Khan"],
-  //   answer: "Ravi Shankar",
-  // },
-  // {
-  //   question: "How many strings does a typical sitar have?",
-  //   options: ["6-7", "8-9", "4-5"],
-  //   answer: "6-7",
-  // },
-  // {
-  //   question:
-  //     "What is the name of the tuning pegs on a sitar that are used for fine-tuning?",
-  //   options: ["Tumbi", "Mukhra", "Taraf"],
-  //   answer: "Taraf",
-  // },
-  // {
-  //   question: "Which drum is played with a pedal in a drum kit?",
-  //   options: ["Tom Drum", "Bass Drum", "Snare Drum"],
-  //   answer: "Bass Drum",
-  // },
-  // {
-  //   question: "What is the hi-hat in a drum set?",
-  //   options: [
-  //     "A type of drum",
-  //     "A pair of cymbals played with a pedal",
-  //     "A tuning mechanism",
-  //   ],
-  //   answer: "A pair of cymbals played with a pedal",
-  // },
-  // {
-  //   question: "What type of instrument is a piano classified as?",
-  //   options: ["String instrument", "Percussion instrument", "Wind instrument"],
-  //   answer: "Percussion instrument",
-  // },
+  {
+    question: "What is the main string of a sitar called?",
+    options: ["Gandhar", "Chikari", "Badhani"],
+    answer: "Chikari",
+  },
+  {
+    question:
+      "Which Indian classical music tradition is the sitar most commonly associated with?",
+    options: ["Hindustani", "Carnatic", "Dhrupad"],
+    answer: "Hindustani",
+  },
+  {
+    question: "Which famous sitar player performed at Woodstock in 1969?",
+    options: ["Anoushka Shankar", "Ravi Shankar", "Ustad Vilayat Khan"],
+    answer: "Ravi Shankar",
+  },
+  {
+    question: "How many strings does a typical sitar have?",
+    options: ["6-7", "8-9", "4-5"],
+    answer: "6-7",
+  },
+  {
+    question:
+      "What is the name of the tuning pegs on a sitar that are used for fine-tuning?",
+    options: ["Tumbi", "Mukhra", "Taraf"],
+    answer: "Taraf",
+  },
+  {
+    question: "Which drum is played with a pedal in a drum kit?",
+    options: ["Tom Drum", "Bass Drum", "Snare Drum"],
+    answer: "Bass Drum",
+  },
+  {
+    question: "What is the hi-hat in a drum set?",
+    options: [
+      "A type of drum",
+      "A pair of cymbals played with a pedal",
+      "A tuning mechanism",
+    ],
+    answer: "A pair of cymbals played with a pedal",
+  },
+  {
+    question: "What type of instrument is a piano classified as?",
+    options: ["String instrument", "Percussion instrument", "Wind instrument"],
+    answer: "Percussion instrument",
+  },
 ];
 const count = 200,
   defaultsOne = {
