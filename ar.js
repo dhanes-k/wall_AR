@@ -24,52 +24,52 @@ let questions = [
     options: ["India", "Pakistan", "Afghanistan"],
     answer: "India",
   },
-  {
-    question: "What is the main string of a sitar called?",
-    options: ["Gandhar", "Chikari", "Badhani"],
-    answer: "Chikari",
-  },
-  {
-    question:
-      "Which Indian classical music tradition is the sitar most commonly associated with?",
-    options: ["Hindustani", "Carnatic", "Dhrupad"],
-    answer: "Hindustani",
-  },
-  {
-    question: "Which famous sitar player performed at Woodstock in 1969?",
-    options: ["Anoushka Shankar", "Ravi Shankar", "Ustad Vilayat Khan"],
-    answer: "Ravi Shankar",
-  },
-  {
-    question: "How many strings does a typical sitar have?",
-    options: ["6-7", "8-9", "4-5"],
-    answer: "6-7",
-  },
-  {
-    question:
-      "What is the name of the tuning pegs on a sitar that are used for fine-tuning?",
-    options: ["Tumbi", "Mukhra", "Taraf"],
-    answer: "Taraf",
-  },
-  {
-    question: "Which drum is played with a pedal in a drum kit?",
-    options: ["Tom Drum", "Bass Drum", "Snare Drum"],
-    answer: "Bass Drum",
-  },
-  {
-    question: "What is the hi-hat in a drum set?",
-    options: [
-      "A type of drum",
-      "A pair of cymbals played with a pedal",
-      "A tuning mechanism",
-    ],
-    answer: "A pair of cymbals played with a pedal",
-  },
-  {
-    question: "What type of instrument is a piano classified as?",
-    options: ["String instrument", "Percussion instrument", "Wind instrument"],
-    answer: "Percussion instrument",
-  },
+  // {
+  //   question: "What is the main string of a sitar called?",
+  //   options: ["Gandhar", "Chikari", "Badhani"],
+  //   answer: "Chikari",
+  // },
+  // {
+  //   question:
+  //     "Which Indian classical music tradition is the sitar most commonly associated with?",
+  //   options: ["Hindustani", "Carnatic", "Dhrupad"],
+  //   answer: "Hindustani",
+  // },
+  // {
+  //   question: "Which famous sitar player performed at Woodstock in 1969?",
+  //   options: ["Anoushka Shankar", "Ravi Shankar", "Ustad Vilayat Khan"],
+  //   answer: "Ravi Shankar",
+  // },
+  // {
+  //   question: "How many strings does a typical sitar have?",
+  //   options: ["6-7", "8-9", "4-5"],
+  //   answer: "6-7",
+  // },
+  // {
+  //   question:
+  //     "What is the name of the tuning pegs on a sitar that are used for fine-tuning?",
+  //   options: ["Tumbi", "Mukhra", "Taraf"],
+  //   answer: "Taraf",
+  // },
+  // {
+  //   question: "Which drum is played with a pedal in a drum kit?",
+  //   options: ["Tom Drum", "Bass Drum", "Snare Drum"],
+  //   answer: "Bass Drum",
+  // },
+  // {
+  //   question: "What is the hi-hat in a drum set?",
+  //   options: [
+  //     "A type of drum",
+  //     "A pair of cymbals played with a pedal",
+  //     "A tuning mechanism",
+  //   ],
+  //   answer: "A pair of cymbals played with a pedal",
+  // },
+  // {
+  //   question: "What type of instrument is a piano classified as?",
+  //   options: ["String instrument", "Percussion instrument", "Wind instrument"],
+  //   answer: "Percussion instrument",
+  // },
 ];
 const count = 200,
   defaultsOne = {
@@ -219,7 +219,52 @@ const openQuiz = () => {
   };
   
   const finished = () => {
-    location.reload();
+    resetQuiz();
+    closeModal();
+  };
+
+  const closeModal = ()=>{
+    glassModal.style.display = "none";
+  }
+
+  const resetQuiz = () => {
+    // Reset the current question index and score
+    currentQuestion = 0;
+    score = 0;
+    
+    // Reset circles and question title
+    circle.forEach((circleElement) => {
+      circleElement.classList.remove("active_circle", "success", "error");
+    });
+    
+    question_title.textContent = "";  // Reset question title
+    question_title.classList.remove("result")
+    // Reset the options (clear any success/error classes and enable them)
+    const optionsList = document.querySelectorAll(".option");
+    optionsList.forEach((option) => {
+      option.classList.remove("success", "error");
+      option.removeAttribute("disabled");
+    });
+  
+    // Hide the score result and reset score text
+    scoreResult.textContent = "";
+  
+    // Reset the finish button and other UI elements
+    finish.classList.remove("enabled");
+    next.classList.remove("enabled");
+  
+    // Reset the modal content (optional, if you need to reset images, etc.)
+    const modalBody = document.querySelector(".glass_modal_body");
+    const existingImg = modalBody.querySelector(".smily-img");
+    if (existingImg) {
+      existingImg.remove(); // Remove the previous image
+    }
+  
+    // Make sure the options container is visible again
+    document.querySelector("#options").style.display = "block";
+  
+    // Reload the first question
+    loadQuestion();
   };
   
   const fireWorksAnimation = () => {

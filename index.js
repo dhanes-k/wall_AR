@@ -10,6 +10,7 @@ const circleParent = document.querySelector(".circle_parent");
 const question_title = document.querySelector(".question");
 const scoreResult = document.querySelector(".score");
 const applause = new Audio("./assets/sounds/applause.wav");
+const loaderMp3 = new Audio("./assets/sounds/loader.mp3");
 let currentQuestion = 0;
 let score = 0;
 let questions = [
@@ -85,6 +86,7 @@ const count = 200,
 // const duration = 15 * 1000,
 //   animationEnd = Date.now() + duration,
 //   defaultsTwo = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
 
 function fire(particleRatio, opts) {
   confetti(
@@ -300,6 +302,7 @@ keys.forEach((key) => {
 });
 
 const playSound = (keys) => {
+  console.log(keys,'dfghj')
   let drums = new Audio(`./assets/sounds/drums/${keys}D.mp3`);
   drums.currentTime = 0;
   drums.play();
