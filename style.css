@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 :root {
   --primary: #547c23;
+  --primary-100: rgb(142, 189, 85);
   --white: #ffffff;
   --black: #000000;
 }
@@ -17,8 +18,8 @@ h6 {
   margin: 0;
 }
 #confetti-canvas {
-  position:absolute;
-  top:0;
+  position: absolute;
+  top: 0;
 }
 #splashScreen {
   background-color: #efefef;
@@ -38,18 +39,18 @@ h6 {
   overflow: hidden;
   opacity: 1;
 }
-.sangeethaImg{
+.sangeethaImg {
   animation: sangeetha_logo 2s linear;
 }
 
 @keyframes sangeetha_logo {
-  0%{
+  0% {
     transform: scale(6) translateY(200px);
   }
-  50%{
+  50% {
     transform: scale(12) translateY(100px);
   }
-  100%{
+  100% {
     transform: scale(1) translateY(0);
   }
 }
@@ -193,9 +194,18 @@ h6 {
   transition: 0.3s ease-in-out;
 }
 
-.main_menu .card:hover img {
+.main_menu .card {
+  transition: transform 0.3s ease;
+}
+
+.main_menu .card:hover {
   transform: scale(1.1);
 }
+
+.main_menu .card:not(:hover) {
+  transform: scale(1);
+}
+
 
 .card_singer {
   display: flex;
@@ -449,19 +459,19 @@ strong {
   box-shadow: 0 5px 1px rgba(32, 32, 32, 0.2);
 }
 
-.drums{
+.drums {
   width: 100%;
   height: auto;
   background-color: lightblue;
   /* display: none; */
 }
 
-.drums img{
+.drums img {
   width: 100%;
   height: 100%;
 }
 
-.glass_modal{
+.glass_modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -470,19 +480,19 @@ strong {
   height: 660px;
   /* height: auto; */
   background-color: rgba(247, 247, 247, 0.507);
-  backdrop-filter: blur( 10px );
+  backdrop-filter: blur(10px);
   border: 2px solid var(--white);
   border-radius: 14px;
   overflow: hidden;
   display: none;
 }
 
-.start-with-ar{
+.start-with-ar {
   text-decoration: none;
   color: var(--white);
 }
 
-.glass{
+.glass {
   border: 1px solid var(--white) !important;
   background-color: rgba(255, 255, 255, 0.055) !important;
   border-radius: 6px !important;
@@ -497,7 +507,7 @@ strong {
   /* font-weight: 600 !important; */
 }
 
-.glass_modal_conatiner{
+.glass_modal_conatiner {
   width: 100%;
   height: 100%;
   display: flex;
@@ -505,64 +515,64 @@ strong {
   flex-direction: column;
 }
 
-
-.glass_modal_header{
+.glass_modal_header {
   height: 14%;
   /* background-color: rgba(173, 216, 230, 0.712); */
 }
 
-.glass_modal_body{
+.glass_modal_body {
   flex-grow: 1 !important;
   width: 100%;
   height: auto;
   /* background-color: rgba(24, 76, 94, 0.774);   */
 }
 
-.glass_modal_footer{
+.glass_modal_footer {
   height: 16%;
   /* background-color: rgba(173, 216, 230, 0.712); */
 }
 
-.circle_status{
+.circle_status {
   width: 10px;
   height: 10px;
   margin-right: 10px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 50%;
 }
-.active_circle{
+.active_circle {
   /* transform: scale(1.6) !important; */
-  box-shadow: 0 0 8px #FFFFFF;
+  box-shadow: 0 0 8px #ffffff;
   margin-right: 14px;
   outline: 1px dashed #000000;
   outline-offset: 1px;
   animation: rotate_circles 1s linear infinite alternate;
 }
 
-.question{
+.question {
   font-size: 26px;
   font-weight: 500;
 }
 
-.error{
+.error {
   background-color: rgb(255, 136, 136) !important;
-  animation: error 0.030s linear 6 alternate;
+  animation: error 0.03s linear 6 alternate;
 }
-.success{
+.success {
   background-color: rgb(156 229 104) !important;
 }
 
-.next,.finish{
+.next,
+.finish {
   display: none !important;
 }
-.enabled{
+.enabled {
   display: block !important;
 }
-.diabled{
+.diabled {
   display: none !important;
 }
 
-.result{
+.result {
   font-family: "Dancing Script", serif;
   display: flex;
   justify-content: center;
@@ -571,6 +581,45 @@ strong {
   height: 100%;
   font-size: 50px;
   font-weight: 600;
+}
+
+.songUI{
+  position: fixed;
+  width: 480px;
+  height: 150px;
+  border-radius: 10px;
+  /* background-color: lightblue; */
+  border: 1px solid var(--white);
+  background-color: rgba(247, 247, 247, 0.507);
+  backdrop-filter: blur(10px);
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-52%, 0%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 999;
+}
+
+.songUI .left, .songUI .right{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 100px;
+  background-color: #0044ff;
+}
+.songUI .center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: var(--white);
+  border-radius: 100px;
 }
 
 @keyframes error {
@@ -583,7 +632,6 @@ strong {
   100% {
     transform: translate(10px);
   }
-  
 }
 
 @keyframes rotate_circles {
@@ -593,14 +641,24 @@ strong {
   100% {
     transform: rotate(360deg);
   }
-} 
+}
 
 @keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px) rotate(-2deg); }
-  50% { transform: translateX(5px) rotate(2deg); }
-  75% { transform: translateX(-5px) rotate(-2deg); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px) rotate(-2deg);
+  }
+  50% {
+    transform: translateX(5px) rotate(2deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(-2deg);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 /* Add this class dynamically to trigger animation */
@@ -663,7 +721,7 @@ strong {
   0% {
     opacity: 1;
   }
-  50%{
+  50% {
     opacity: 0.5;
   }
   100% {
@@ -716,23 +774,35 @@ strong {
     font-weight: 600 !important;
   }
 
-  .glass_modal{
+  .glass_modal {
     width: 80%;
     height: 500px;
     min-height: 400px;
   }
 
-  .result,.question,.glass{
+  .result,
+  .question,
+  .glass {
     font-size: 4.4vw;
+  }
+
+  .songUI{
+    width: 380px;
+    height: 150px;
   }
 }
 
+.heading h4 {
+  position: fixed;
+  /* animation: marquee 30s linear infinite; */
+}
+
 .musicletter {
+  margin: -1px;
   display: inline-block;
   animation: moveUpDown 1.4s ease-in-out infinite;
 }
 
-  /* Stagger animation delay for each letter (including spaces) */
 .musicletter:nth-child(1) {
   animation-delay: 0s;
 }
@@ -840,20 +910,31 @@ strong {
   animation-delay: 2.7s;
 }
 
-.Playlist_title{
+.Playlist_title {
   text-shadow: 1px 1px 2px white !important;
 }
 
-
 @keyframes moveUpDown {
   0% {
-      transform: translateY(0);
+    transform: translateY(0);
   }
   50% {
-      transform: translateY(-10px);
+    transform: translateY(-10px);
   }
   100% {
-      transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(65vw);
+  }
+  /* 50% {
+      transform: translateX(50vw);
+  } */
+  100% {
+    transform: translateX(-70vw);
   }
 }
 
@@ -866,7 +947,7 @@ strong {
   .text-body-content {
     font-size: 2.4vw !important;
   }
-  .musicletter{
+  .musicletter {
     font-size: 14px !important;
     font-weight: 700 !important;
   }
@@ -889,8 +970,8 @@ body {
   margin-bottom: 20px;
 }
 .profile-img {
-  width: 60px;  
-  height: 60px; 
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   margin-right: 15px;
 }
@@ -907,10 +988,11 @@ body {
   align-items: center;
   margin-bottom: 20px;
 }
-.playing{
+.playing {
   background-color: #1db954 !important;
 }
-.playing .song-info h4,.playing .song-info p{
+.playing .song-info h4,
+.playing .song-info p {
   color: var(--white) !important;
 }
 .now-playing-info h3 {
@@ -926,7 +1008,7 @@ body {
   padding: 0;
   margin: 0;
 }
-.playlist .range{
+.playlist .range {
   padding: 10px !important;
 }
 .playlist .playlist-item {
@@ -968,4 +1050,33 @@ body {
 }
 .control-btn:hover {
   background-color: #1ed760;
+}
+.accent {
+  accent-color: var(--primary) !important;
+}
+
+.form-range.accent::-webkit-slider-runnable-track {
+  background: var(--primary-100);
+}
+
+.form-range.accent::-moz-range-track {
+  background: var(--primary-100); 
+}
+
+.form-range.accent::-ms-track {
+  background: var(--primary-100);
+  border-color: transparent;
+  color: transparent;
+}
+
+.form-range.accent::-webkit-slider-thumb {
+  background: var(--primary);
+}
+
+.form-range.accent::-moz-range-thumb {
+  background: var(--primary);
+}
+
+.form-range.accent::-ms-thumb {
+  background: var(--primary);
 }

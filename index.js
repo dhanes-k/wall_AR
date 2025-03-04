@@ -87,7 +87,6 @@ const count = 200,
 //   animationEnd = Date.now() + duration,
 //   defaultsTwo = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-
 function fire(particleRatio, opts) {
   confetti(
     Object.assign({}, defaultsOne, opts, {
@@ -114,7 +113,7 @@ const circle = document.querySelectorAll(".circle_status");
 loadQuestion();
 
 function openModel(event) {
-  console.log(event,'dfghj')
+  console.log(event, "dfghj");
   modal.textContent = event;
   switch (event) {
     case "Piano":
@@ -302,9 +301,8 @@ keys.forEach((key) => {
 });
 
 const playSound = (keys) => {
-  console.log(keys,'dfghj')
   let drums = new Audio(`./assets/sounds/drums/${keys}D.mp3`);
-  drums.currentTime = 0;
+  // drums.currentTime = 0.00;
   drums.play();
 };
 const playSitar = (keys) => {
@@ -341,7 +339,7 @@ const checkAnswer = (option) => {
   const optionsList = document.querySelectorAll(".option");
   if (question.options[option] === question.answer) {
     optionsList[option].classList.add("success");
-    new Audio('./assets/sounds/bubble.mp3').play();
+    new Audio("./assets/sounds/bubble.mp3").play();
     fire(0.25, {
       spread: 26,
       startVelocity: 55,
@@ -453,97 +451,116 @@ const fireWorksAnimation = () => {
 // MS subba lakshmi code//
 document.addEventListener("DOMContentLoaded", function () {
   function setupPlayer(modalId, audioPlayerId) {
-      const modal = document.getElementById(modalId);
-      const audioPlayer = document.getElementById(audioPlayerId);
-      const playlist = modal.querySelector(".playlist");
-
-      if (!playlist) return; // Exit if no playlist found
-
-      let currentSongIndex = -1;
-
-      // Handle playlist item click
-      playlist.addEventListener("click", function (event) {
-          const item = event.target.closest("li");
-          if (!item) return;
-
-          const playPauseBtn = item.querySelector(".playPauseBtn");
-
-          if (playPauseBtn.contains(event.target)) {
-              togglePlayPause(item);
-          } else {
-              playSong(Array.from(playlist.children).indexOf(item));
-          }
-      });
-
-      // Toggle between play/pause for the selected song
-      function togglePlayPause(item) {
-          const index = Array.from(playlist.children).indexOf(item);
-
-          if (currentSongIndex === index) {
-              if (audioPlayer.paused) {
-                  audioPlayer.play();
-                  updateUIState(item, true);
-              } else {
-                  audioPlayer.pause();
-                  updateUIState(item, false);
-              }
-          } else {
-              playSong(index);
-          }
+    const modal = document.getElementById(modalId);
+    const audioPlayer = document.getElementById(audioPlayerId);
+    const playlist = modal.querySelector(".playlist");
+    const rangeSlider = modal.querySelector("#customRange1");  // Get the slider
+  
+    if (!playlist || !rangeSlider) return; // Exit if no playlist or slider found
+  
+    let currentSongIndex = -1;
+  
+    // Handle playlist item click
+    playlist.addEventListener("click", function (event) {
+      const item = event.target.closest("li");
+      if (!item) return;
+  
+      const playPauseBtn = item.querySelector(".playPauseBtn");
+  
+      if (playPauseBtn.contains(event.target)) {
+        togglePlayPause(item);
+      } else {
+        playSong(Array.from(playlist.children).indexOf(item));
       }
-
-      // Play the selected song
-      function playSong(index) {
-          if (currentSongIndex !== -1) {
-              updateUIState(playlist.children[currentSongIndex], false);
-          }
-
-          currentSongIndex = index;
-          const selectedSong = playlist.children[index].getAttribute("data-src");
-
-          if (audioPlayer.src !== selectedSong) {
-              audioPlayer.src = selectedSong;
-          }
+    });
+  
+    // Toggle between play/pause for the selected song
+    function togglePlayPause(item) {
+      const index = Array.from(playlist.children).indexOf(item);
+      if (currentSongIndex === index) {
+        if (audioPlayer.paused) {
           audioPlayer.play();
-          updateUIState(playlist.children[index], true);
-      }
-
-      // Update UI state for play/pause button
-      function updateUIState(item, isPlaying) {
-          const button = item.querySelector(".playPauseBtn");
-          button.textContent = isPlaying ? "⏸" : "▶";
-
-          item.classList.toggle("playing", isPlaying);
-      }
-
-      // Play next song when the current song ends
-      audioPlayer.addEventListener("ended", function () {
-          if (currentSongIndex < playlist.children.length - 1) {
-              playSong(currentSongIndex + 1);
-          } else {
-              // Reset UI when the last song finishes
-              updateUIState(playlist.children[currentSongIndex], false);
-              currentSongIndex = -1;
-          }
-      });
-
-      // Stop audio and reset UI when modal is closed
-      modal.addEventListener("hidden.bs.modal", function () {
+          updateUIState(item, true);
+        } else {
           audioPlayer.pause();
-          audioPlayer.currentTime = 0;
-
-          playlist.querySelectorAll(".playPauseBtn").forEach((btn) => {
-              btn.textContent = "▶";
-          });
-
-          if (currentSongIndex !== -1) {
-              playlist.children[currentSongIndex].classList.remove("playing");
-          }
-          currentSongIndex = -1;
+          updateUIState(item, false);
+        }
+      } else {
+        playSong(index);
+      }
+    }
+  
+    // Play the selected song
+    function playSong(index) {
+      if (currentSongIndex !== -1) {
+        updateUIState(playlist.children[currentSongIndex], false);
+      }
+  
+      currentSongIndex = index;
+      const selectedSong = playlist.children[index].getAttribute("data-src");
+  
+      if (audioPlayer.src !== selectedSong) {
+        audioPlayer.src = selectedSong;
+      }
+      audioPlayer.play();
+      updateUIState(playlist.children[index], true);
+    }
+  
+    // Update UI state for play/pause button
+    function updateUIState(item, isPlaying) {
+      const playPause = document.querySelector(".playPauseCenter");
+      const button = item.querySelector(".playPauseBtn");
+      button.textContent = isPlaying ? "⏸" : "▶";
+      playPause.src = isPlaying ? "./assets/img/pause-play.png" : "./assets/img/play.png";
+      item.classList.toggle("playing", isPlaying);
+    }
+  
+    // Play next song when the current song ends
+    audioPlayer.addEventListener("ended", function () {
+      if (currentSongIndex < playlist.children.length - 1) {
+        playSong(currentSongIndex + 1);
+      } else {
+        // Reset UI when the last song finishes
+        updateUIState(playlist.children[currentSongIndex], false);
+        currentSongIndex = -1;
+      }
+    });
+  
+    // Stop audio and reset UI when modal is closed
+    modal.addEventListener("hidden.bs.modal", function () {
+      audioPlayer.pause();
+      audioPlayer.currentTime = 0;
+  
+      playlist.querySelectorAll(".playPauseBtn").forEach((btn) => {
+        btn.textContent = "▶";
       });
+  
+      if (currentSongIndex !== -1) {
+        playlist.children[currentSongIndex].classList.remove("playing");
+      }
+      currentSongIndex = -1;
+    });
+  
+    audioPlayer.addEventListener("timeupdate", function () {
+      const progress = audioPlayer.currentTime;
+      rangeSlider.value = progress;
+    });
+  
+    rangeSlider.addEventListener("input", function () {
+      const newTime = rangeSlider.value;
+      audioPlayer.currentTime = newTime;
+      rangeSlider.style.background = `linear-gradient(to right, red ${value}%, lightgray ${value}%)`;
+    });
+  
+    audioPlayer.addEventListener("loadedmetadata", function () {
+      rangeSlider.max = audioPlayer.duration;
+    });
   }
+    
 
   // Setup players for both modals
   setupPlayer("subbuModal", "ms-audio-player");
   setupPlayer("yesudasModal", "yesudas-audio-player");
 });
+
+

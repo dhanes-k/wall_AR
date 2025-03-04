@@ -995,6 +995,25 @@
                   <button class="playPauseBtn">▶</button>
                 </li>
               </ul>
+
+              <div class="songUI">
+                <!-- <div class="title text-left">dflklkjdlkfd</div> -->
+                <input
+                type="range"
+                class="accent"
+                id="customRange1"
+                min="0"
+                max="100"
+                value="0"
+                />
+                <div class="title text-start d-flex justify-content-center align-center my-2">
+                  <div class="left my-auto mx-2"></div>
+                  <div class="center my-auto mx-2">
+                    <img src="./assets/img/play.png" onClick="playPause()" class="playPauseCenter" width="100%" height="100%" alt="">
+                  </div>
+                  <div class="right my-auto mx-2"></div>
+                </div>
+              </div>
               <!-- === HIDDEN AUDIO PLAYER === -->
               <audio id="yesudas-audio-player"></audio>
               <!-- <audio id="audio-player"></audio> -->
@@ -1020,31 +1039,31 @@
           <span class="musicletter">i</span>
           <span class="musicletter">v</span>
           <span class="musicletter">e</span>
-          <span class="musicletter"> </span>
+          <span class="musicletter"> &nbsp; </span>
           <span class="musicletter">i</span>
           <span class="musicletter">n</span>
           <span class="musicletter">t</span>
           <span class="musicletter">o</span>
-          <span class="musicletter"> </span>
+          <span class="musicletter"> &nbsp; </span>
           <span class="musicletter">t</span>
           <span class="musicletter">h</span>
           <span class="musicletter">e</span>
-          <span class="musicletter"> </span>
+          <span class="musicletter"> &nbsp; </span>
           <span class="musicletter">r</span>
           <span class="musicletter">e</span>
           <span class="musicletter">a</span>
           <span class="musicletter">l</span>
           <span class="musicletter">m</span>
-          <span class="musicletter"> </span>
+          <span class="musicletter"> &nbsp; </span>
           <span class="musicletter">o</span>
           <span class="musicletter">f</span>
-          <span class="musicletter"> </span>
+          <span class="musicletter"> &nbsp; </span>
           <span class="musicletter">m</span>
           <span class="musicletter">u</span>
           <span class="musicletter">s</span>
           <span class="musicletter">i</span>
           <span class="musicletter">c</span>
-      </h4>
+        </h4>
       </div>
       <div class="main">
         <div class="AR">
@@ -1109,7 +1128,9 @@
               </div>
             </div>
             <div class="col-6 card_singer">
-              <p class="p-0 m-0 fs-6 fw-semibold Playlist_title">Explore Our Playlist</p>
+              <p class="p-0 m-0 fs-6 fw-semibold Playlist_title">
+                Explore Our Playlist
+              </p>
               <div class="card_one">
                 <div
                   onclick="openModel('M.S.Subbulakshmi')"

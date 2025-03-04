@@ -75,16 +75,42 @@ const count = 200,
   defaultsOne = {
     origin: { y: 0.7 },
   };
-function showDialog(imageSrc, textContent) {
-    document.getElementById("dialogImage").src = imageSrc;
+  function showDialog(imageSrc, videoSrc, textContent) {
+    let imageElement = document.getElementById("dialogImage");
+    let videoElement = document.getElementById("dialogVideo");
+    let videoSourceElement = document.getElementById("videoSource");
+
+    // Hide both elements initially
+    imageElement.style.display = "none";
+    videoElement.style.display = "none";
+
+     // Pause and reset video if switching to an image
+    if (imageSrc) {
+        videoElement.pause();
+        videoElement.currentTime = 0;
+    }
+
+    // Set content based on whether it's an image or a video
+    if (videoSrc) {
+        videoSourceElement.src = videoSrc;
+        videoElement.load(); // Reload video to apply new source
+        videoElement.style.display = "block";
+    } else if (imageSrc) {
+        imageElement.src = imageSrc;
+        imageElement.style.display = "block";
+    }
+
     document.getElementById("dialogText").innerText = textContent;
     document.getElementById("dialogBox").style.display = "block";
 }
 
 function closeDialog() {
     document.getElementById("dialogBox").style.display = "none";
-}
 
+    let video = document.getElementById("dialogVideo");
+    video.pause(); // Pause the video when closing
+    video.currentTime = 0; // Reset video to the beginning
+}
 function fire(particleRatio, opts) {
     confetti(
       Object.assign({}, defaultsOne, opts, {
