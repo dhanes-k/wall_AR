@@ -113,7 +113,6 @@ const circle = document.querySelectorAll(".circle_status");
 loadQuestion();
 
 function openModel(event) {
-  console.log(event, "dfghj");
   modal.textContent = event;
   switch (event) {
     case "Piano":
@@ -427,6 +426,13 @@ const finished = () => {
   location.reload();
 };
 
+function stopAllAudioPlayers() {
+  document.querySelectorAll("audio").forEach((player) => {
+    player.pause();
+    player.currentTime = 0;
+  });
+}
+
 const fireWorksAnimation = () => {
   const duration = 15 * 1000,
     animationEnd = Date.now() + duration,
@@ -449,31 +455,335 @@ const fireWorksAnimation = () => {
   }, 250);
 };
 // MS subba lakshmi code//
+// document.addEventListener("DOMContentLoaded", function () {
+//   function setupPlayer(modalId, audioPlayerId) {
+//     const modal = document.getElementById(modalId);
+//     const audioPlayer = document.getElementById(audioPlayerId);
+//     const playlist = modal.querySelector(".playlist");
+//     const rangeSlider = modal.querySelector("#customRange1"); // Get the slider
+
+//     if (!playlist || !rangeSlider) return; // Exit if no playlist or slider found
+
+//     let currentSongIndex = -1;
+
+//     // Handle playlist item click
+//     playlist.addEventListener("click", function (event) {
+//       const item = event.target.closest("li");
+//       if (!item) return;
+
+//       const playPauseBtn = item.querySelector(".playPauseBtn");
+
+//       if (playPauseBtn.contains(event.target)) {
+//         togglePlayPause(item);
+//       } else {
+//         playSong(Array.from(playlist.children).indexOf(item));
+//       }
+//     });
+
+//     // Toggle between play/pause for the selected song
+//     function togglePlayPause(item) {
+//       const index = Array.from(playlist.children).indexOf(item);
+//       console.log(index, "index");
+//       if (currentSongIndex === index) {
+//         if (audioPlayer.paused) {
+//           audioPlayer.play();
+//           updateUIState(item, true);
+//         } else {
+//           audioPlayer.pause();
+//           updateUIState(item, false);
+//         }
+//       } else {
+//         playSong(index);
+//       }
+//     }
+
+//     // Play the selected song
+//     function playSong(index) {
+//       if (currentSongIndex !== -1) {
+//         updateUIState(playlist.children[currentSongIndex], false);
+//       }
+
+//       currentSongIndex = index;
+//       const selectedSong = playlist.children[index].getAttribute("data-src");
+
+//       if (audioPlayer.src !== selectedSong) {
+//         audioPlayer.src = selectedSong;
+//       }
+//       audioPlayer.play();
+//       updateUIState(playlist.children[index], true);
+//     }
+
+//     // Update UI state for play/pause button
+//     function updateUIState(item, isPlaying) {
+//       const playPause = document.querySelector(".playPauseCenter");
+//       const button = item.querySelector(".playPauseBtn");
+//       button.textContent = isPlaying ? "⏸" : "▶";
+//       playPause.src = isPlaying
+//         ? "./assets/img/pause-play.png"
+//         : "./assets/img/play.png";
+//       item.classList.toggle("playing", isPlaying);
+//     }
+
+//     // Play next song when the current song ends
+//     audioPlayer.addEventListener("ended", function () {
+//       if (currentSongIndex < playlist.children.length - 1) {
+//         playSong(currentSongIndex + 1);
+//       } else {
+//         // Reset UI when the last song finishes
+//         updateUIState(playlist.children[currentSongIndex], false);
+//         currentSongIndex = -1;
+//       }
+//     });
+
+//     // Stop audio and reset UI when modal is closed
+//     modal.addEventListener("hidden.bs.modal", function () {
+//       audioPlayer.pause();
+//       audioPlayer.currentTime = 0;
+
+//       playlist.querySelectorAll(".playPauseBtn").forEach((btn) => {
+//         btn.textContent = "▶";
+//       });
+
+//       if (currentSongIndex !== -1) {
+//         playlist.children[currentSongIndex].classList.remove("playing");
+//       }
+//       currentSongIndex = -1;
+//     });
+
+//     audioPlayer.addEventListener("timeupdate", function () {
+//       const progress = audioPlayer.currentTime;
+//       rangeSlider.value = progress;
+//     });
+
+//     rangeSlider.addEventListener("input", function () {
+//       const newTime = rangeSlider.value;
+//       audioPlayer.currentTime = newTime;
+//     });
+
+//     audioPlayer.addEventListener("loadedmetadata", function () {
+//       rangeSlider.max = audioPlayer.duration;
+//     });
+//     const playPauseEvent = () => {
+//       const playPause = document.querySelector(".playPauseCenter");
+//       const button = document.querySelectorAll(".playPauseBtn")[10];
+//       audioPlayer.paused ? audioPlayer.play() : audioPlayer.pause();
+//       button.textContent = audioPlayer.paused ? "▶" : "⏸";
+//       playPause.src = audioPlayer.paused
+//         ? "./assets/img/play.png"
+//         : "./assets/img/pause-play.png";
+//     };
+//     document
+//       .querySelector(".playPauseCenter")
+//       .addEventListener("click", playPauseEvent);
+//   }
+
+//   // Setup players for both modals
+//   setupPlayer("subbuModal", "ms-audio-player");
+//   setupPlayer("yesudasModal", "yesudas-audio-player");
+// });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   function setupPlayer(modalId, audioPlayerId) {
+//     console.log(modalId, "setupPlayer");
+//     const modal = document.getElementById(modalId);
+//     const audioPlayer = document.getElementById(audioPlayerId);
+//     const playlist = modal.querySelector(".playlist");
+//     const rangeSlider = modal.querySelector("#customRange1");
+
+//     if (!playlist || !rangeSlider) return;
+
+//     let currentSongIndex = -1;
+
+//     // Handle playlist item click
+//     playlist.addEventListener("click", function (event) {
+//       const item = event.target.closest("li");
+//       if (!item) return;
+
+//       const playPauseBtn = item.querySelector(".playPauseBtn");
+
+//       if (playPauseBtn.contains(event.target)) {
+//         togglePlayPause(item);
+//       } else {
+//         playSong(Array.from(playlist.children).indexOf(item));
+//       }
+//     });
+
+//     // Toggle between play/pause for the selected song
+//     function togglePlayPause(item) {
+//       const index = Array.from(playlist.children).indexOf(item);
+//       if (currentSongIndex === index) {
+//         if (audioPlayer.paused) {
+//           audioPlayer.play();
+//           updateUIState(item, true);
+//         } else {
+//           audioPlayer.pause();
+//           updateUIState(item, false);
+//         }
+//       } else {
+//         playSong(index);
+//       }
+//     }
+
+//     // Play the selected song
+//     function playSong(index) {
+//       if (currentSongIndex !== -1) {
+//         updateUIState(playlist.children[currentSongIndex], false);
+//       }
+
+//       currentSongIndex = index;
+//       const selectedSong = playlist.children[index].getAttribute("data-src");
+
+//       if (audioPlayer.src !== selectedSong) {
+//         audioPlayer.src = selectedSong;
+//       }
+
+//       audioPlayer
+//         .play()
+//         .then(() => {
+//           console.log("Song is playing...");
+//         })
+//         .catch((error) => {
+//           console.error("Error playing the song:", error);
+//         });
+
+//       updateUIState(playlist.children[index], true);
+//     }
+
+//     // Update UI state for play/pause button
+//     function updateUIState(item, isPlaying) {
+//       const playPause = document.querySelector(".playPauseCenterOne");
+//       const playPauseTwo = document.querySelector(".playPauseCenterTwo");
+//       const button = item.querySelector(".playPauseBtn");
+//       button.textContent = isPlaying ? "⏸" : "▶";
+//       playPause.src = isPlaying
+//         ? "./assets/img/pause-play.png"
+//         : "./assets/img/play.png";
+//       playPauseTwo.src = isPlaying
+//         ? "./assets/img/pause-play.png"
+//         : "./assets/img/play.png";
+//       item.classList.toggle("playing", isPlaying);
+//     }
+
+//     // Play next song when the current song ends
+//     audioPlayer.addEventListener("ended", function () {
+//       if (currentSongIndex < playlist.children.length - 1) {
+//         playSong(currentSongIndex + 1);
+//       } else {
+//         // Reset UI when the last song finishes
+//         updateUIState(playlist.children[currentSongIndex], false);
+//         currentSongIndex = -1;
+//       }
+//     });
+
+//     // Stop audio and reset UI when modal is closed
+//     modal.addEventListener("hidden.bs.modal", function () {
+//       audioPlayer.pause();
+//       audioPlayer.currentTime = 0;
+
+//       playlist.querySelectorAll(".playPauseBtn").forEach((btn) => {
+//         btn.textContent = "▶";
+//       });
+
+//       if (currentSongIndex !== -1) {
+//         playlist.children[currentSongIndex].classList.remove("playing");
+//       }
+//       currentSongIndex = -1;
+//     });
+
+//     // Update the range slider as the audio plays
+//     audioPlayer.addEventListener("timeupdate", function () {
+//       const progress = audioPlayer.currentTime;
+//       rangeSlider.value = progress;
+//     });
+
+//     // Seek through the audio when the slider is used
+//     rangeSlider.addEventListener("input", function () {
+//       const newTime = rangeSlider.value;
+//       audioPlayer.currentTime = newTime;
+//     });
+
+//     // Update slider max value when audio metadata is loaded (duration)
+//     audioPlayer.addEventListener("loadedmetadata", function () {
+//       rangeSlider.max = audioPlayer.duration;
+//     });
+
+//     // Play/Pause Event for central button (playPauseCenter)
+//     const playPauseEventOne = () => {
+//       const playPause = document.querySelector(".playPauseCenterOne");
+//       const button =
+//         document.querySelectorAll(".playPauseBtn")[currentSongIndex];
+//       console.log(button, "suuu");
+//       if (audioPlayer.paused) {
+//         audioPlayer.play();
+//         button.textContent = "⏸";
+//         playPause.src = "./assets/img/pause-play.png";
+//       } else {
+//         audioPlayer.pause();
+//         button.textContent = "▶";
+//         playPause.src = "./assets/img/play.png";
+//       }
+//     };
+//     const playPauseEventTwo = () => {
+//       const playPauseTwo = document.querySelector(".playPauseCenterTwo");
+//       const button =
+//         document.querySelectorAll(".playPauseBtn")[
+//           modalId === subbuModal ? currentSongIndex : currentSongIndex + 10
+//         ];
+//       console.log(button, "yee");
+//       if (audioPlayer.paused) {
+//         audioPlayer.play();
+//         button.textContent = "⏸";
+//         playPauseTwo.src = "./assets/img/pause-play.png";
+//       } else {
+//         audioPlayer.pause();
+//         button.textContent = "▶";
+//         playPauseTwo.src = "./assets/img/play.png";
+//       }
+//     };
+
+//     document
+//       .querySelector(".playPauseCenterOne")
+//       .addEventListener("click", playPauseEventOne);
+//     document
+//       .querySelector(".playPauseCenterTwo")
+//       .addEventListener("click", playPauseEventTwo);
+//   }
+
+//   // Setup players for both modals
+//   setupPlayer("subbuModal", "ms-audio-player");
+//   setupPlayer("yesudasModal", "yesudas-audio-player");
+// });
+
 document.addEventListener("DOMContentLoaded", function () {
   function setupPlayer(modalId, audioPlayerId) {
+    console.log(modalId, "setupPlayer");
+
     const modal = document.getElementById(modalId);
     const audioPlayer = document.getElementById(audioPlayerId);
     const playlist = modal.querySelector(".playlist");
-    const rangeSlider = modal.querySelector("#customRange1");  // Get the slider
-  
-    if (!playlist || !rangeSlider) return; // Exit if no playlist or slider found
-  
+    const rangeSlider = modal.querySelector("#customRange1");
+    const RANGE = document.querySelectorAll(".songUI");
+    if (!playlist || !rangeSlider) return;
+
     let currentSongIndex = -1;
-  
+
     // Handle playlist item click
     playlist.addEventListener("click", function (event) {
+      RANGE.forEach((val) => {
+        val.classList.remove("diabled");
+        val.classList.add("range");
+      });
       const item = event.target.closest("li");
       if (!item) return;
-  
+
       const playPauseBtn = item.querySelector(".playPauseBtn");
-  
       if (playPauseBtn.contains(event.target)) {
         togglePlayPause(item);
       } else {
         playSong(Array.from(playlist.children).indexOf(item));
       }
     });
-  
+
     // Toggle between play/pause for the selected song
     function togglePlayPause(item) {
       const index = Array.from(playlist.children).indexOf(item);
@@ -489,78 +799,175 @@ document.addEventListener("DOMContentLoaded", function () {
         playSong(index);
       }
     }
-  
+
     // Play the selected song
+    // function playSong(index) {
+    //   if (currentSongIndex !== -1) {
+    //     updateUIState(playlist.children[currentSongIndex], false);
+    //   }
+
+    //   currentSongIndex = index;
+    //   const selectedSong = playlist.children[index].getAttribute("data-src");
+
+    //   if (audioPlayer.src !== selectedSong) {
+    //     audioPlayer.src = selectedSong;
+    //   }
+
+    //   audioPlayer
+    //     .play()
+    //     .then(() => console.log("Song is playing..."))
+    //     .catch((error) => console.error("Error playing the song:", error));
+
+    //   updateUIState(playlist.children[index], true);
+    // }
+
     function playSong(index) {
+      stopAllAudioPlayers(); // Ensure no other songs are playing
+    
       if (currentSongIndex !== -1) {
         updateUIState(playlist.children[currentSongIndex], false);
       }
-  
+    
       currentSongIndex = index;
       const selectedSong = playlist.children[index].getAttribute("data-src");
-  
+    
       if (audioPlayer.src !== selectedSong) {
         audioPlayer.src = selectedSong;
       }
-      audioPlayer.play();
+    
+      audioPlayer
+        .play()
+        .then(() => console.log("Song is playing..."))
+        .catch((error) => console.error("Error playing the song:", error));
+    
       updateUIState(playlist.children[index], true);
     }
-  
+
     // Update UI state for play/pause button
     function updateUIState(item, isPlaying) {
-      const playPause = document.querySelector(".playPauseCenter");
+      const playPause = document.querySelector(".playPauseCenterOne");
+      const playPauseTwo = document.querySelector(".playPauseCenterTwo");
       const button = item.querySelector(".playPauseBtn");
       button.textContent = isPlaying ? "⏸" : "▶";
-      playPause.src = isPlaying ? "./assets/img/pause-play.png" : "./assets/img/play.png";
+      playPause.src = isPlaying
+        ? "./assets/img/pause-play.png"
+        : "./assets/img/play.png";
+      playPauseTwo.src = isPlaying
+        ? "./assets/img/pause-play.png"
+        : "./assets/img/play.png";
       item.classList.toggle("playing", isPlaying);
     }
-  
+
     // Play next song when the current song ends
     audioPlayer.addEventListener("ended", function () {
       if (currentSongIndex < playlist.children.length - 1) {
         playSong(currentSongIndex + 1);
       } else {
-        // Reset UI when the last song finishes
         updateUIState(playlist.children[currentSongIndex], false);
         currentSongIndex = -1;
       }
     });
-  
+
     // Stop audio and reset UI when modal is closed
+    // modal.addEventListener("hidden.bs.modal", function () {
+    //   audioPlayer.currentTime = 0;
+    //   audioPlayer.pause();
+    //   RANGE.forEach((val) => {
+    //     val.classList.remove("range");
+    //     val.classList.add("diabled");
+    //   });
+    //   playlist.querySelectorAll(".playPauseBtn").forEach((btn) => {
+    //     btn.textContent = "▶";
+    //   });
+
+    //   if (currentSongIndex !== -1) {
+    //     playlist.children[currentSongIndex].classList.remove("playing");
+    //   }
+    //   currentSongIndex = -1;
+    // });
+
     modal.addEventListener("hidden.bs.modal", function () {
-      audioPlayer.pause();
-      audioPlayer.currentTime = 0;
-  
-      playlist.querySelectorAll(".playPauseBtn").forEach((btn) => {
-        btn.textContent = "▶";
-      });
-  
-      if (currentSongIndex !== -1) {
-        playlist.children[currentSongIndex].classList.remove("playing");
-      }
-      currentSongIndex = -1;
-    });
-  
+  stopAllAudioPlayers(); // Ensure no audio is playing
+  RANGE.forEach((val) => {
+    val.classList.remove("range");
+    val.classList.add("diabled");
+  });
+  playlist.querySelectorAll(".playPauseBtn").forEach((btn) => {
+    btn.textContent = "▶";
+  });
+
+  if (currentSongIndex !== -1) {
+    playlist.children[currentSongIndex].classList.remove("playing");
+  }
+  currentSongIndex = -1;
+});
+
+    // Update the range slider as the audio plays
     audioPlayer.addEventListener("timeupdate", function () {
-      const progress = audioPlayer.currentTime;
-      rangeSlider.value = progress;
+      rangeSlider.value = audioPlayer.currentTime;
     });
-  
+
+    // Seek through the audio when the slider is used
     rangeSlider.addEventListener("input", function () {
-      const newTime = rangeSlider.value;
-      audioPlayer.currentTime = newTime;
-      rangeSlider.style.background = `linear-gradient(to right, red ${value}%, lightgray ${value}%)`;
+      audioPlayer.currentTime = rangeSlider.value;
     });
-  
+
+    // Update slider max value when audio metadata is loaded (duration)
     audioPlayer.addEventListener("loadedmetadata", function () {
       rangeSlider.max = audioPlayer.duration;
     });
+
+    // Central Play/Pause event handler for both buttons
+    function playPauseEvent(playPauseElement, buttonIndex) {
+      const button = document.querySelectorAll(".playPauseBtn")[buttonIndex];
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+        button.textContent = "⏸";
+        playPauseElement.src = "./assets/img/pause-play.png";
+      } else {
+        audioPlayer.pause();
+        button.textContent = "▶";
+        playPauseElement.src = "./assets/img/play.png";
+      }
+    }
+
+    // Next and Previous Song Event Listeners
+    const previousBtn = modal.querySelector(".previousSongBtn");
+    const nextBtn = modal.querySelector(".nextSongBtn");
+
+    // Go to previous song
+    if (previousBtn) {
+      previousBtn.addEventListener("click", function () {
+        if (currentSongIndex > 0) {
+          playSong(currentSongIndex - 1);
+        }
+      });
+    }
+
+    // Go to next song
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        if (currentSongIndex < playlist.children.length - 1) {
+          playSong(currentSongIndex + 1);
+        }
+      });
+    }
+
+    const playPauseCenterOne = document.querySelector(".playPauseCenterOne");
+    const playPauseCenterTwo = document.querySelector(".playPauseCenterTwo");
+
+    // Attach event listeners to central buttons
+    playPauseCenterOne.addEventListener("click", function () {
+      playPauseEvent(playPauseCenterOne, currentSongIndex);
+    });
+    playPauseCenterTwo.addEventListener("click", function () {
+      const adjustedIndex =
+        modalId === "subbuModal" ? currentSongIndex : currentSongIndex + 10;
+      playPauseEvent(playPauseCenterTwo, adjustedIndex);
+    });
   }
-    
 
   // Setup players for both modals
   setupPlayer("subbuModal", "ms-audio-player");
   setupPlayer("yesudasModal", "yesudas-audio-player");
 });
-
-

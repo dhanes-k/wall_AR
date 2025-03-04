@@ -637,7 +637,38 @@
                   <button class="playPauseBtn">▶</button>
                 </li>
               </ul>
-
+              <div class="songUI diabled">
+                <!-- <div class="title text-left">dflklkjdlkfd</div> -->
+                <input
+                  type="range"
+                  class="accent"
+                  id="customRange1"
+                  min="0"
+                  max="100"
+                  value="0"
+                />
+                <div
+                  class="title text-start d-flex justify-content-center align-center my-2"
+                >
+                  <div class="left my-auto mx-2 previousSongBtn">
+                    <img src="./assets/img/previous.png" width="100%"
+                    height="100%" alt="">
+                  </div>
+                  <div class="center my-auto mx-2">
+                    <img
+                      src="./assets/img/play.png"
+                      class="playPauseCenterOne"
+                      width="100%"
+                      height="100%"
+                      alt=""
+                    />
+                  </div>
+                  <div class="right my-auto mx-2 nextSongBtn">
+                    <img src="./assets/img/next.jpg" width="100%"
+                    height="100%" alt="">
+                  </div>
+                </div>
+              </div>
               <!-- === HIDDEN AUDIO PLAYER === -->
               <audio id="ms-audio-player"></audio>
               <!-- <audio id="audio-player"></audio> -->
@@ -996,22 +1027,36 @@
                 </li>
               </ul>
 
-              <div class="songUI">
+              <div class="songUI diabled">
                 <!-- <div class="title text-left">dflklkjdlkfd</div> -->
                 <input
-                type="range"
-                class="accent"
-                id="customRange1"
-                min="0"
-                max="100"
-                value="0"
+                  type="range"
+                  class="accent"
+                  id="customRange1"
+                  min="0"
+                  max="100"
+                  value="0"
                 />
-                <div class="title text-start d-flex justify-content-center align-center my-2">
-                  <div class="left my-auto mx-2"></div>
-                  <div class="center my-auto mx-2">
-                    <img src="./assets/img/play.png" onClick="playPause()" class="playPauseCenter" width="100%" height="100%" alt="">
+                <div
+                  class="title text-start d-flex justify-content-center align-center my-2"
+                >
+                  <div class="left my-auto mx-2 previousSongBtn">
+                    <img src="./assets/img/previous.png" width="100%"
+                    height="100%" alt="">
                   </div>
-                  <div class="right my-auto mx-2"></div>
+                  <div class="center my-auto mx-2">
+                    <img
+                    src="./assets/img/play.png"
+                    class="playPauseCenterTwo"
+                    width="100%"
+                    height="100%"
+                    alt=""
+                    />
+                  </div>
+                  <div class="right my-auto mx-2 nextSongBtn">
+                    <img src="./assets/img/next.jpg" width="100%"
+                    height="100%" alt="">
+                  </div>
                 </div>
               </div>
               <!-- === HIDDEN AUDIO PLAYER === -->
