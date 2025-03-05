@@ -1059,3 +1059,10 @@ body {
   accent-color: var(--primary) !important;
   cursor: pointer;
 }
+.powered-text {
+  position: absolute;
+  bottom: 0px;
+  font-size: 12px;
+  color: var(--black);
+  font-weight: 500;
+}
